@@ -1,3 +1,12 @@
+# TODO 
+
+* Set up Rspec
+* Set up Sidekiq
+* Write Sidekiq job to scrape https://www.comono.co.uk/work-with-us/
+* Deploy on Heroku 
+
+
+
 # README
 
 This README would normally document whatever steps are necessary to get the
