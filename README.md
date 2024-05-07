@@ -1,33 +1,7 @@
-# TODO 
+README
+This README would normally document whatever steps are necessary to get the application up and running.
 
-* Set up Rspec
-* Set up Sidekiq
-* Write Sidekiq job to scrape https://www.comono.co.uk/work-with-us/
-* Deploy on Heroku 
+Installing Rspec
+Rspec will automaticly create a factories directory when a new model is created e.g scaffold so don't create it manually. I used this guide but placed config.include FactoryBot::Syntax::Methods in the rails_helper.rb file.
 
-
-
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+TODO: Clean up `config.include FactoryBot::Syntax::Methods`
