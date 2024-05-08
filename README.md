@@ -12,6 +12,10 @@ Rspec will automaticly create a factories directory when a new model is created 
 
 
 #### TODO:
-* Clean up `config.include FactoryBot::Syntax::Methods`
+* Create a skeleton job to show that sidekiq is working
+* > Follow up with a web scraper in a later commit
 
 * Set up Procfile
+
+* Clean up `config.include FactoryBot::Syntax::Methods`
+
