@@ -10,6 +10,8 @@ Rspec will automaticly create a factories directory when a new model is created 
 
 * Set up Procfile guide [here](https://railsnotes.xyz/blog/procfile-bin-dev-rails7)
 
+* Reddit post about Sidekiq webscraper [here](spec/models/payment_confirmation_spec.rb)
+
 
 #### TODO:
 * Create a skeleton job to show that sidekiq is working
