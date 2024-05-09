@@ -12,6 +12,8 @@ Rspec will automaticly create a factories directory when a new model is created 
 
 * Reddit post about Sidekiq webscraper [here](spec/models/payment_confirmation_spec.rb)
 
+* configure sidekiq thread pool [here](https://www.rubyguides.com/2015/07/ruby-threads/)
+
 
 #### TODO:
 * Create a skeleton job to show that sidekiq is working
