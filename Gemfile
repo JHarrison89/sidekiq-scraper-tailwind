@@ -48,8 +48,14 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-# process jobs async
+# Process jobs async
 gem "sidekiq", "~> 7.2"
+
+# Perform HTTP requests & retrieve HTML documents
+gem 'httparty'
+
+# Parse HTML pages, select HTML elements, and extract data.
+gem 'nokogiri'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -57,6 +63,8 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :development do
