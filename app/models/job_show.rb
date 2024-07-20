@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class WebPage < ApplicationRecord
+class JobShow < ApplicationRecord
   validates :company, :url, :script, presence: true
 end

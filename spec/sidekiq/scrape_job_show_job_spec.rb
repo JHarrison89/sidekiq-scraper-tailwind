@@ -3,24 +3,24 @@
 require 'rails_helper'
 require 'sidekiq/testing'
 
-# Stubs a show page script thats
+# Stubs a job page script thats
 # custom designed to scrape the
 # show page of a site
 # e.g doorsopen.com
-class ShowPageScript
+class JobShowPageScript
   def self.call(url:); end
 end
 
 # Tests the show page job. The call to the
 # show page script is stubs to avoid calling
 # out to a real website.
-RSpec.describe ScrapeShowPageJob, type: :job do
+RSpec.describe ScrapeJobShowJob, type: :job do
   include ActiveSupport::Testing::TimeHelpers
 
   describe '#perform' do
     let(:url) { 'https://www.example.com' }
     let(:attributes) { OpenStruct.new(company_name: 'NVS', title: 'Ticketing Manager', url:) }
-    let(:script) { ShowPageScript }
+    let(:script) { JobShowPageScript }
 
     before { allow(script).to receive(:call).and_return(attributes) }
 
