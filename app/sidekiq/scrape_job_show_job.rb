@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Queues up a
-class ScrapeShowPageJob
+class ScrapeJobShowJob
   include Sidekiq::Job
 
   def perform(script:, url:)

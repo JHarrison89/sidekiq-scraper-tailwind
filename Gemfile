@@ -57,6 +57,12 @@ gem 'httparty'
 # Parse HTML pages, select HTML elements, and extract data.
 gem 'nokogiri'
 
+# Watir interacts with a browser the same way people do
+gem 'watir'
+
+# # Browser automation framework
+# gem 'webdrivers'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[ mri mingw x64_mingw ]

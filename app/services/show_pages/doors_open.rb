@@ -4,7 +4,8 @@ require 'httparty'
 require 'nokogiri'
 
 module ShowPages
-  # Scraps and saves a webpage
+  # Scraps a webpage and saves the
+  # result as a JobShow
   class DoorsOpen
     def self.call(url)
       # Downloading target web page
