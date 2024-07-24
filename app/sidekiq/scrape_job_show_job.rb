@@ -4,12 +4,17 @@
 class ScrapeJobShowJob
   include Sidekiq::Job
 
-  def perform(script:, url:)
+  def perform(id)
+    record = JobShow.find(id)
+
     # Instantiate object
-    script = Object.const_get(script)
+    script = Object.const_get(record.script)
 
     # Scrape webspage and return result
-    attributes = script.call(url:)
+    attributes = script.call(record.url)
+
+    # Early return if script return nil
+    return if attributes.nil?
 
     # Find or create job record
     SaveJob.call(attributes)
