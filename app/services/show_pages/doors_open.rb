@@ -4,27 +4,47 @@ require 'httparty'
 require 'nokogiri'
 
 module ShowPages
-  # Scraps a webpage and saves the
-  # result as a JobShow
+  # Scraps a webpage and returns
+  # an object with job attributes
   class DoorsOpen
+    Result = Struct.new(
+      :company_name,
+      :url,
+      :title,
+      keyword_init: true
+    )
+
     def self.call(url)
-      # Downloading target web page
-      response = HTTParty.get(url)
+      attempts = 0
+      max_attempts = 3
 
-      # Parsing the HTML document returned by the server
-      doc = Nokogiri::HTML(response.body)
+      while attempts < max_attempts
+        # Downloading target web page
+        sleep rand(300)
+        response = HTTParty.get(url)
 
-      # Extract ob title
-      title = doc.css('.details-header__title').text.strip
+        # Parsing the HTML document returned by the server
+        doc = Nokogiri::HTML(response.body)
 
-      Struct.new('Result', :company_name, :title)
+        # Extract title
+        title = doc.css('.details-header__title').text.strip
 
-      # Return object
-      Struct::Result.new(
-        company_name: 'Doors Open',
-        url:,
-        title:
-      )
+        if response.code == 200
+
+          # Return object when successful
+          return Result.new(
+            company_name: 'Doors Open',
+            url:,
+            title:
+          )
+        else
+          sleep rand(300)
+          attempts += 1
+        end
+      end
+
+      # return nil when failed
+      nil
     end
   end
 end
