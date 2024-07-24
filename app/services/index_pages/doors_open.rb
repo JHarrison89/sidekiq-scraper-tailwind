@@ -9,7 +9,7 @@ module IndexPages
   class DoorsOpen
     def self.call
       # Open a browser
-      browser = Watir::Browser.new
+      browser = Watir::Browser.new :chrome, headless: true
 
       # Navigate to the target index
       browser.goto 'https://www.doorsopen.co/jobs/?q=&l=London%2C+UK'
