@@ -8,7 +8,7 @@ require 'sidekiq/testing'
 # show page of a site
 # e.g doorsopen.com
 class JobShowPageScript
-  def self.call(url:); end
+  def self.call(url); end
 end
 
 # Tests the show page job. The call to the
@@ -18,15 +18,15 @@ RSpec.describe ScrapeJobShowJob, type: :job do
   include ActiveSupport::Testing::TimeHelpers
 
   describe '#perform' do
-    let(:url) { 'https://www.example.com' }
-    let(:attributes) { OpenStruct.new(company_name: 'NVS', title: 'Ticketing Manager', url:) }
+    let(:attributes) { OpenStruct.new(company_name: 'NVS', title: 'Ticketing Manager', url: 'url') }
     let(:script) { JobShowPageScript }
+    let(:job_show) { create(:JobShow) }
 
     before { allow(script).to receive(:call).and_return(attributes) }
 
     context 'when given attributes of a new job' do
       it 'creates a new job record' do
-        expect { subject.perform(script: script.name, url:) }
+        expect { subject.perform(job_show.id) }
           .to change(Job, :count).by(1)
 
         expect(Job.last).to have_attributes(
@@ -39,10 +39,10 @@ RSpec.describe ScrapeJobShowJob, type: :job do
       describe 'when give attributes of an existing job' do
         it 'finds and updates the job' do
           travel_to(1.month.ago)
-          Job.create(company_name: 'job record', title: 'that exists already', url:)
+          Job.create(company_name: 'job record', title: 'that exists already', url: 'url')
           travel_back
 
-          expect { subject.perform(script: script.name, url:) }
+          expect { subject.perform(job_show.id) }
             .to change(Job, :count).by(0)
         end
       end
