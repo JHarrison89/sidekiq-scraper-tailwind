@@ -58,4 +58,7 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  config.active_job.queue_adapter = :test
+  # https://stackoverflow.com/questions/78862599/argumenterror-assert-no-enqueued-jobs-requires-the-active-job-test-adapter-you
 end
