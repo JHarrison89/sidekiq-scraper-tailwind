@@ -1,5 +1,7 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: %i[ show edit update destroy ]
+  before_action :set_user
+  before_action :redirect_unless_admin
+  before_action :set_job, only: %i[show edit update destroy]
 
   # GET /jobs or /jobs.json
   def index
@@ -58,13 +60,21 @@ class JobsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_job
-      @job = Job.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def job_params
-      params.require(:job).permit(:company_name, :title, :url)
-    end
+  def set_user
+    @user = Current.user
+  end
+
+  def redirect_unless_admin
+    redirect_to account_path unless @user.email == 'jeremaia.harrison@gmail.com'
+  end
+
+  def set_job
+    @job = Job.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def job_params
+    params.require(:job).permit(:company_name, :title, :url)
+  end
 end
