@@ -20,7 +20,7 @@ Rspec will automaticly create a factories directory when a new model is created 
 
 #### Rails credentials VS .ENVS
 * https://thoughtbot.com/blog/switching-from-env-files-to-rails-credentials
-I had to recreate my credentials.yml and master key: `rm config/credentials.yml.enc bin/rails credentials:edit`
+I had to recreate my credentials.yml and master key: `rm config/credentials.yml.enc EDITOR="code --wait" bin/rails credentials:edit`
 
 
 Sending emails with Sidekiq 
