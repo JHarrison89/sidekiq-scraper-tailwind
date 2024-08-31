@@ -14,6 +14,23 @@ Rspec will automaticly create a factories directory when a new model is created 
 
 * configure sidekiq thread pool [here](https://www.rubyguides.com/2015/07/ruby-threads/)
 
+## Configuring emails 
+* https://www.louisramos.dev/blogs/send-mail-on-rails-7-with-gmail
+
+
+#### Rails credentials VS .ENVS
+* https://thoughtbot.com/blog/switching-from-env-files-to-rails-credentials
+I had to recreate my credentials.yml and master key: `rm config/credentials.yml.enc bin/rails credentials:edit`
+
+
+Sending emails with Sidekiq 
+Because we've installed Sidekiq as our jobs queue, we use to it send emails. 
+Sidekiq needed to be restarted to pick up the new SMTP configs before it could send emails.
+
+> If you made changes to your email configuration (like SMTP settings) or to the job itself, Sidekiq might not pick up those changes until it is restarted. Sidekiq loads the application code when it starts, so any updates to the code or environment variables might require a restart to take effect.
+
+https://www.codewithjason.com/restart-sidekiq-automatically-deployment/
+
 
 #### TODO:
 * Create a skeleton job to show that sidekiq is working
