@@ -29,3 +29,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore compiled and bundles assets
+/app/assets/builds/*
+!/app/assets/builds/.keep
