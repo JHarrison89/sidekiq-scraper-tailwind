@@ -1,4 +1,5 @@
 class Identity::EmailsController < ApplicationController
+  layout 'account'
   before_action :set_user
 
   def edit
