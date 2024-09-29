@@ -4,10 +4,10 @@ import { enter, leave } from "el-transition"
 
 // Connects to data-controller="navbar"
 export default class extends Controller {
-  static targets = ["container"]
+  static targets = ["sidenav", "dropdown"]
 
   toggleSideNav() {
-    if (this.containerTarget.classList.contains('hidden')) {
+    if (this.sidenavTarget.classList.contains('hidden')) {
       this.openSideNav()
     } else {
       this.closeSideNav()
@@ -16,11 +16,28 @@ export default class extends Controller {
 
   openSideNav() {
     // el-transition.js shows the element by removing the hidden class
-    enter(this.containerTarget);
+    enter(this.sidenavTarget);
   }
 
   closeSideNav() {
     // el-transition.js hides the element by addding the hidden class
-    leave(this.containerTarget)
+    leave(this.sidenavTarget)
+  }
+
+
+  toggleDropDown() {
+    if (this.dropdownTarget.classList.contains('hidden')) {
+      this.openDropDown()
+    } else {
+      this.closeDropDown()
+    }
+  }
+
+  openDropDown() {
+    this.dropdownTarget.classList.remove('hidden');
+  }
+
+  closeDropDown() {
+    this.dropdownTarget.classList.add('hidden');
   }
 }
