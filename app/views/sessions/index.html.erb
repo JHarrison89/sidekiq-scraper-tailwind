@@ -1,34 +1,40 @@
-<p style="color: green"><%= notice %></p>
+<h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">Devices & Sessions</h1>
+<p class="mt-2 text-sm text-gray-700">A list of all the devices signed into your account.</p>
+<hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10 dark:border-white/10">
+<div class="mt-8 flow-root overflow-hidden">
+  <table class="w-full text-left">
+    <thead class="bg-white">
+      <tr>
+        <th scope="col" class="relative isolate py-3.5 pr-3 text-left text-sm font-semibold text-gray-900 min-w-80">
+          User Agent
+          <div class="absolute inset-y-0 left-0 -z-10 w-screen border-b border-b-gray-200"></div>
+        </th>
+        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Date</th>
+        <th scope="col" class="relative py-3.5 pl-3 min-w-20">
+          <span class="sr-only">Edit</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sessions.each do |session| %>
+        <tr>
+          <td class="relative py-4 pr-3 text-sm font-medium text-gray-900 whitespace-nowrap text-ellipsis max-w-10">
+            <div class="truncate ..."> <%= session.user_agent %> </div>
+            <div class="absolute bottom-0 right-full h-px w-screen bg-gray-100"></div>
+            <div class="absolute bottom-0 left-0 h-px w-screen bg-gray-100"></div>
+          </td>
+          <td class="hidden px-3 py-4 text-sm text-gray-500 md:table-cell">
+            <%= session.created_at.strftime("%A, %b %d") %>
+          </td>
+          <td class="relative py-4 pl-3 text-right text-sm font-medium">
+            <%= button_to "Log out", session, method: :delete, class: "text-indigo-600 hover:text-indigo-900" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<h1>Devices & Sessions</h1>
-
-<div id="sessions">
-  <% @sessions.each do |session| %>
-    <div id="<%= dom_id session %>">
-      <p>
-        <strong>User Agent:</strong>
-        <%= session.user_agent %>
-      </p>
-
-      <p>
-        <strong>Ip Address:</strong>
-        <%= session.ip_address %>
-      </p>
-
-      <p>
-        <strong>Created at:</strong>
-        <%= session.created_at %>
-      </p>
-
-    </div>
-    <p>
-      <%= button_to "Log out", session, method: :delete %>
-    </p>
-  <% end %>
-</div>
-
-<br>
-
-<div>
-  <%= link_to "Back", account_path %>
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+    <%= link_to "Back", account_path, class: "text-sm font-semibold leading-6 text-gray-900" %>
+  </div>
 </div>
