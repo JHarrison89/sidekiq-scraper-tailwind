@@ -12,15 +12,10 @@
 
 <div class="mt-6 flex items-center justify-end gap-x-6">
   <%= link_to "Back to jobs", account_path, class: "text-sm font-semibold leading-6 text-gray-900" %>
+  <%= button_to "Apply now", job_saves_path(@job), method: :post %>
 
-  <%# Add a nested controllers to save and reject jobs %>
 
-  <%# Find out more about Tailwind and button_to in Rails %>
-  <%= form_with url: account_path, method: :delete, data: { confirm: "Are you sure?" }, class: "inline" do %>
-    <%= button_tag "Save job", type: "submit", class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
-  <% end %>
+  <%= button_to "Save job", job_saves_path(@job, job_id: @job.id), method: :post, class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
 
-    <%= form_with url: account_path, method: :delete, data: { confirm: "Are you sure?" }, class: "inline" do %>
-    <%= button_tag "Reject job", type: "submit", class: "rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
-  <% end %>
+  <%= button_tag "Reject job", type: "submit", class: "rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
 </div>
