@@ -1,10 +1,26 @@
-<p style="color: green"><%= notice %></p>
+<div class="flex min-w-0 gap-x-4">
+  <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<%= image_path("logos/#{@job.company_name.downcase}.jpg") %>" alt="">
+  <div class="min-w-0 flex-auto">
+   <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white"><%= @job.title %></h1>
+    <p class="mt-1 text-sm leading-6 text-gray-600"><%= @job.company_name %></p>
+  </div>
+</div>
 
-<%= render @job %>
+<hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10 dark:border-white/10">
 
-<div>
-  <%= link_to "Edit this job", edit_job_path(@job) %> |
-  <%= link_to "Back to jobs", jobs_path %>
+<p><%= Faker::Quote.matz %></p>
 
-  <%= button_to "Destroy this job", @job, method: :delete %>
+<div class="mt-6 flex items-center justify-end gap-x-6">
+  <%= link_to "Back to jobs", account_path, class: "text-sm font-semibold leading-6 text-gray-900" %>
+
+  <%# Add a nested controllers to save and reject jobs %>
+
+  <%# Find out more about Tailwind and button_to in Rails %>
+  <%= form_with url: account_path, method: :delete, data: { confirm: "Are you sure?" }, class: "inline" do %>
+    <%= button_tag "Save job", type: "submit", class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+  <% end %>
+
+    <%= form_with url: account_path, method: :delete, data: { confirm: "Are you sure?" }, class: "inline" do %>
+    <%= button_tag "Reject job", type: "submit", class: "rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
+  <% end %>
 </div>

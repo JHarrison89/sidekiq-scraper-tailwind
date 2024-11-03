@@ -3,6 +3,8 @@ class JobsController < ApplicationController
   before_action :redirect_unless_admin
   before_action :set_job, only: %i[show edit update destroy]
 
+  layout 'account'
+
   # GET /jobs or /jobs.json
   def index
     @jobs = Job.all
