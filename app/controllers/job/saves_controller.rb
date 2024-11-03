@@ -1,4 +1,10 @@
 class Job::SavesController < ApplicationController
+  layout 'account'
+
+  def index
+    @jobs = Current.user.jobs
+  end
+
   def create
     job = Job.find(params[:job_id])
 
