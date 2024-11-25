@@ -79,6 +79,22 @@
                 </div>
                 <ul role="list" class="-mx-2 mt-2 space-y-1">
                 <nav class="flex flex-1 flex-col">
+                  <div class="text-xs font-semibold leading-6 text-gray-400">Job list</div>
+                  <ul role="list" class="flex flex-1 flex-col gap-y-7">
+                    <li>
+                      <ul role="list" class="-mx-2 space-y-1">
+                        <li>
+                          <%= link_to job_saves_path, class: "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600" do %>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="fill-green-300" viewBox="0 0 30 30" width="30px" height="30px">
+                              <path d="M23,27l-8-7l-8,7V5c0-1.105,0.895-2,2-2h12c1.105,0,2,0.895,2,2V27z"/>
+                            </svg>
+                              Saved
+                            </a>
+                          <% end %>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
                   <div class="text-xs font-semibold leading-6 text-gray-400">Account settings</div>
                   <ul role="list" class="flex flex-1 flex-col gap-y-7">
                     <li>
@@ -137,6 +153,23 @@
           <nav class="flex flex-1 flex-col">
             <ul role="list" class="flex flex-1 flex-col gap-y-7">
               <li>
+                <div class="text-xs font-semibold leading-6 text-gray-400">Job list</div>
+                  <ul role="list" class="flex flex-1 flex-col gap-y-7">
+                    <li>
+                      <ul role="list" class="-mx-2 space-y-1">
+                        <li>
+                          <%= link_to job_saves_path, class: "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600" do %>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="fill-green-300" viewBox="0 0 30 30" width="30px" height="30px">
+                              <path d="M23,27l-8-7l-8,7V5c0-1.105,0.895-2,2-2h12c1.105,0,2,0.895,2,2V27z"/>
+                            </svg>
+                              Saved
+                            </a>
+                          <% end %>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+
                 <div class="text-xs font-semibold leading-6 text-gray-400">Account settings</div>
                 <ul role="list" class="-mx-2 space-y-1">
                   <li>
