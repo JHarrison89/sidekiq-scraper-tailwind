@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_11_074335) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_03_200845) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,12 +22,30 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_11_074335) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "job_users", force: :cascade do |t|
+    t.integer "status", default: 0
+    t.bigint "user_id", null: false
+    t.bigint "job_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_job_users_on_job_id"
+    t.index ["user_id", "job_id"], name: "index_job_users_on_user_id_and_job_id", unique: true
+    t.index ["user_id"], name: "index_job_users_on_user_id"
+  end
+
   create_table "jobs", force: :cascade do |t|
     t.string "company_name"
     t.string "title"
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "jobs_users", id: false, force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["job_id"], name: "index_jobs_users_on_job_id"
+    t.index ["user_id"], name: "index_jobs_users_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -48,5 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_11_074335) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "job_users", "jobs"
+  add_foreign_key "job_users", "users"
   add_foreign_key "sessions", "users"
 end
