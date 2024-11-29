@@ -5,13 +5,22 @@
 
       <div class="flex">
         <%= @job.company_name %>
-        <% if Current.user.jobs.where(id: @job).present? %>
+
+        <% if @status == :saved %>
           |
           <svg xmlns="http://www.w3.org/2000/svg" class="fill-green-300" viewBox="0 0 30 30" width="20px" height="25px">
             <path d="M23,27l-8-7l-8,7V5c0-1.105,0.895-2,2-2h12c1.105,0,2,0.895,2,2V27z"/>
           </svg>
           <div class="min-w-0 flex-auto">
             <p>Saved</p>
+          </div>
+        <% elsif @status == :rejected  %>
+          |
+          <svg xmlns="http://www.w3.org/2000/svg" class="fill-red-300" viewBox="0 0 30 30" width="20px" height="25px">
+            <path d="M23,27l-8-7l-8,7V5c0-1.105,0.895-2,2-2h12c1.105,0,2,0.895,2,2V27z"/>
+          </svg>
+          <div class="min-w-0 flex-auto">
+            <p>Rejected</p>
           </div>
         <% end %>
       </div>
@@ -27,9 +36,12 @@
 <div class="mt-6 flex items-center justify-end gap-x-6">
   <%= link_to "Back to jobs", account_path, class: "text-sm font-semibold leading-6 text-gray-900" %>
 
-  <% if Current.user.jobs.where(id: @job).blank? %>
-    <%= button_to "Save job", job_saves_path(@job, job_id: @job.id), method: :post, class: "rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
+  <% if @status == :saved %>
+      <%= button_to "Reject job", job_rejects_path(job_id: @job.id), method: :post, class: "rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
+  <% elsif @status == :rejected %>
+      <%= button_to "Save job", job_saves_path(job_id: @job.id), method: :post, class: "rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
   <% else %>
-    <%= button_tag "Reject job", type: "submit", class: "rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
+    <%= button_to "Reject job", job_rejects_path(job_id: @job.id), method: :post, class: "rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
+    <%= button_to "Save job", job_saves_path(job_id: @job.id), method: :post, class: "rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %>
   <% end %>
 </div>
