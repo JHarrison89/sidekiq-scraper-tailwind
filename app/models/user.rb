@@ -9,6 +9,8 @@ class User < ApplicationRecord
   end
 
   has_many :sessions, dependent: :destroy
+  has_many :job_users  # Association with the join table
+  has_many :jobs, through: :job_users  # Many-to-many association through JobUser
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, allow_nil: true, length: { minimum: 12 }

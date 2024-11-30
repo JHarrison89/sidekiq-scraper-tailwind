@@ -12,6 +12,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/1 or /jobs/1.json
   def show
+    set_status
   end
 
   # GET /jobs/new
@@ -73,6 +74,11 @@ class JobsController < ApplicationController
 
   def set_job
     @job = Job.find(params[:id])
+  end
+
+  def set_status
+    status = JobUser.find_by(job_id: @job.id, user_id: Current.user.id)&.status
+    @status = status.nil? ? :none : status.to_sym
   end
 
   # Only allow a list of trusted parameters through.
