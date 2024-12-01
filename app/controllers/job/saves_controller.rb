@@ -1,8 +1,11 @@
 class Job::SavesController < ApplicationController
   layout 'account'
 
+  include DateSortable
+
   def index
-    @jobs = Current.user.jobs.where(job_users: { status: :saved })
+    jobs = Current.user.jobs.where(job_users: { status: :saved })
+    @jobs = organize_by_date(jobs)
   end
 
   def create

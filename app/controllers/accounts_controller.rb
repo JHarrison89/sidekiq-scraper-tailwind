@@ -1,10 +1,11 @@
 class AccountsController < ApplicationController
   layout 'account'
 
+  include DateSortable
+
   def show
     jobs = Job.all.where.not(id: associated_job_ids)
-    jobs = jobs.all.group_by { _1.created_at.to_date }
-    @jobs = jobs.sort_by { |key, _| key }.reverse
+    @jobs = organize_by_date(jobs)
 
     flash[:notice] = 'Kiwis are tiny birds.'
   end
