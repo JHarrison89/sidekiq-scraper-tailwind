@@ -8,20 +8,20 @@
 
         <% if @status == :saved %>
           |
-          <svg xmlns="http://www.w3.org/2000/svg" class="fill-green-300" viewBox="0 0 30 30" width="20px" height="25px">
-            <path d="M23,27l-8-7l-8,7V5c0-1.105,0.895-2,2-2h12c1.105,0,2,0.895,2,2V27z"/>
-          </svg>
-          <div class="min-w-0 flex-auto">
-            <p>Saved</p>
-          </div>
+          <span class="inline-flex items-center gap-x-1.5 rounded-full ml-1 px-2 py-1 text-xs font-medium text-gray-900 ring-1 ring-inset ring-gray-200">
+            <svg class="size-1.5 fill-green-500" viewBox="0 0 6 6" aria-hidden="true">
+              <circle cx="3" cy="3" r="3" />
+            </svg>
+            Saved
+          </span>
         <% elsif @status == :rejected  %>
           |
-          <svg xmlns="http://www.w3.org/2000/svg" class="fill-red-300" viewBox="0 0 30 30" width="20px" height="25px">
-            <path d="M23,27l-8-7l-8,7V5c0-1.105,0.895-2,2-2h12c1.105,0,2,0.895,2,2V27z"/>
-          </svg>
-          <div class="min-w-0 flex-auto">
-            <p>Rejected</p>
-          </div>
+          <span class="inline-flex items-center gap-x-1.5 rounded-full ml-1 px-2 py-1 text-xs font-medium text-gray-900 ring-1 ring-inset ring-gray-200">
+            <svg class="size-1.5 fill-red-500" viewBox="0 0 6 6" aria-hidden="true">
+              <circle cx="3" cy="3" r="3" />
+            </svg>
+            Rejected
+          </span>
         <% end %>
       </div>
     </div>
