@@ -1,8 +1,11 @@
 class Job::RejectsController < ApplicationController
   layout 'account'
 
+  include DateSortable
+
   def index
-    @jobs = Current.user.jobs.where(job_users: { status: :rejected })
+    jobs = Current.user.jobs.where(job_users: { status: :rejected })
+    @jobs = organize_by_date(jobs)
   end
 
   def create
