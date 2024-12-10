@@ -1,7 +1,7 @@
 <ul role="list" class="divide-y divide-gray-100">
   <div class="flex flex-col space-y-8">
     <% @jobs.each do |date, jobs| %>
-      <div>
+      <div class="job-list">
         <p class="mt-1 text-2xl/8 font-semibold sm:text-xl/8 dark:text-white">Posted <%= time_ago_in_words(date) %> ago</p>
         <% jobs.each do |job| %>
             <%= link_to job_path(job) do %>
