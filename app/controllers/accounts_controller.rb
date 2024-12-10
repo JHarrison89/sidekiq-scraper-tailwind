@@ -4,8 +4,11 @@ class AccountsController < ApplicationController
   include DateSortable
 
   def show
-    jobs = Job.all.where.not(id: associated_job_ids)
-    @jobs = organize_by_date(jobs)
+    # jobs = Job.all.where.not(id: associated_job_ids)
+    # @jobs = organize_by_date(jobs)
+
+    jobs = Job.all
+    @jobs = RecordGrouper.new.call(jobs)
 
     flash[:notice] = 'Kiwis are tiny birds.'
   end
