@@ -64,4 +64,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Allows you to use the travel_to method in your tests
+  config.include ActiveSupport::Testing::TimeHelpers
 end
