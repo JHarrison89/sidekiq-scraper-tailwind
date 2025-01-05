@@ -8,7 +8,7 @@ class Job::SavesController < ApplicationController
     @jobs = RecordGrouper.call(jobs)
   end
 
-  def create
+  def update
     job = Job.find(params[:job_id])
 
     record = Current.user.job_users.find_or_create_by!(job:)
