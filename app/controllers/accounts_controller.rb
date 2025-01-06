@@ -4,10 +4,12 @@ class AccountsController < ApplicationController
   include DateSortable
 
   def show
-    jobs = Job.all
+    jobs = Job.all.where.not(id: associated_job_ids)
     @jobs = RecordGrouper.call(jobs)
 
-    flash[:notice] = 'Kiwis are tiny birds.'
+    @all_jobs_total = @jobs.count
+    @saved_jobs_count = 5
+    @rejected_jobs_count = 5
   end
 
   private
