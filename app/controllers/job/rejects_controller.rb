@@ -9,11 +9,13 @@ class Job::RejectsController < ApplicationController
   end
 
   def update
-    job = Job.find(params[:job_id])
-    record = Current.user.job_users.find_or_create_by(job:)
-    record.update(status: :rejected)
-    flash[:notice] = 'Rejected job'
+    @job = Job.find(params[:job_id])
 
-    redirect_to job_path(job)
+    job_user = Current.user.job_users.find_or_create_by(job: @job)
+    job_user.update(status: :rejected)
+
+    @status = job_user.status.to_sym
+
+    flash[:notice] = 'Rejected job'
   end
 end
