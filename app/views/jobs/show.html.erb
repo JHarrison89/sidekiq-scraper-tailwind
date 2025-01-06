@@ -1,26 +1,23 @@
-
-<turbo-frame id="page_body">
-  <div class="flex min-w-0 gap-x-4">
-    <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<%= logo_helper(company_name: @job.company_name) %>" alt="">
-    <div class="min-w-0 flex-auto space-y-2">
-    <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white"><%= @job.title %></h1>
-      <div class="flex space-x-2">
-        <div>
-          <%= @job.company_name %>
-        </div>
-        <%= render "status", status: @status %>
+<div class="flex min-w-0 gap-x-4">
+  <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<%= logo_helper(company_name: @job.company_name) %>" alt="">
+  <div class="min-w-0 flex-auto space-y-2">
+  <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white"><%= @job.title %></h1>
+    <div class="flex space-x-2">
+      <div>
+        <%= @job.company_name %>
       </div>
-      <p class="mt-1 text-xs leading-5 text-gray-500">Posted <%= @job.created_at.strftime("%-d %b, %Y, %-l:%M%P") %></p>
+      <%= render "status", status: @status %>
     </div>
+    <p class="mt-1 text-xs leading-5 text-gray-500">Posted <%= @job.created_at.strftime("%-d %b, %Y, %-l:%M%P") %></p>
   </div>
+</div>
 
-  <hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10 dark:border-white/10">
+<hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10 dark:border-white/10">
 
-  <p><%= Faker::Quote.matz %></p>
+<p><%= Faker::Quote.matz %></p>
 
-  <div class="mt-6 flex items-center justify-end gap-x-6">
-    <%= link_to "Back to jobs", account_path, data: {turbo_frame: "_top"}, class: "text-sm font-semibold leading-6 text-gray-900" %>
+<div class="mt-6 flex items-center justify-end gap-x-6">
+  <%= link_to "Back to jobs", account_path, class: "text-sm font-semibold leading-6 text-gray-900" %>
 
-    <%= render "action", job: @job, status: @status %>
-  </div>
-</turbo-frame>
+  <%= render "action", job: @job, status: @status %>
+</div>
