@@ -5,6 +5,8 @@ class JobsController < ApplicationController
 
   layout 'account'
 
+  include JobUserCounter
+
   # GET /jobs or /jobs.json
   def index
     @jobs = Job.all

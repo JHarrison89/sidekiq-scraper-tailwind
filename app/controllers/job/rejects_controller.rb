@@ -1,7 +1,7 @@
 class Job::RejectsController < ApplicationController
   layout 'account'
 
-  include DateSortable
+  include JobUserCounter
 
   def index
     jobs = Current.user.jobs.where(job_users: { status: :rejected })
@@ -13,6 +13,8 @@ class Job::RejectsController < ApplicationController
 
     job_user = Current.user.job_users.find_or_create_by(job: @job)
     job_user.update(status: :rejected)
+
+    count_job_user_records
 
     @status = job_user.status.to_sym
 
