@@ -5,3 +5,7 @@
 <%= turbo_stream.replace "action" do %>
   <%= render "jobs/action", job: @job, status: @status %>
 <% end %>
+
+<%= turbo_stream.update "flash" do %>
+  <%= render "layouts/flash" %>
+<% end %>
