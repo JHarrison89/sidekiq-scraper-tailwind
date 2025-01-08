@@ -1,7 +1,7 @@
 class Job::SavesController < ApplicationController
   layout 'account'
 
-  include DateSortable
+  include JobUserCounter
 
   def index
     jobs = Current.user.jobs.where(job_users: { status: :saved })
@@ -9,12 +9,15 @@ class Job::SavesController < ApplicationController
   end
 
   def update
-    job = Job.find(params[:job_id])
+    @job = Job.find(params[:job_id])
 
-    record = Current.user.job_users.find_or_create_by!(job:)
-    record.update(status: :saved)
+    job_user = Current.user.job_users.find_or_create_by(job: @job)
+    job_user.update(status: :saved)
+
+    count_job_user_records
+
+    @status = job_user.status.to_sym
+
     flash[:notice] = 'Saved job'
-
-    redirect_to job_path(job)
   end
 end
