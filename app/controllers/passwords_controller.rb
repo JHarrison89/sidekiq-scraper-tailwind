@@ -1,8 +1,12 @@
 class PasswordsController < ApplicationController
   layout 'account'
+
   before_action :set_user
 
+  include JobUserCounter
+
   def edit
+    count_job_user_records
   end
 
   def update
