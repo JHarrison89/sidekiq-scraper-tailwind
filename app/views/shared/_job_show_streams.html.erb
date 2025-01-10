@@ -22,8 +22,8 @@
   <%= @saved_count %>
 <% end %>
 
-<%= turbo_stream.update "save_count_mobile" do %>
-  <%= @save_count %>
+<%= turbo_stream.update "saved_count_mobile" do %>
+  <%= @saved_count %>
 <% end %>
 
 <%= turbo_stream.update "rejected_count" do %>
