@@ -17,7 +17,7 @@
 <p><%= Faker::Quote.matz %></p>
 
 <div class="mt-6 flex items-center justify-end gap-x-6">
-  <%= link_to "Back to jobs", account_path, class: "text-sm font-semibold leading-6 text-gray-900" %>
+  <%= link_to "Back", account_path, class: "text-sm font-semibold leading-6 text-gray-900" %>
 
   <%= render "action", job: @job, status: @status %>
 </div>
