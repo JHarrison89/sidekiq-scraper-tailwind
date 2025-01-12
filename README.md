@@ -31,6 +31,10 @@ Sidekiq needed to be restarted to pick up the new SMTP configs before it could s
 
 https://www.codewithjason.com/restart-sidekiq-automatically-deployment/
 
+##### Set up Heroku 
+https://devcenter.heroku.com/articles/getting-started-with-rails7#create-a-welcome-page
+- bundle lock --add-platform x86_64-linux
+
 
 #### TODO:
 * Create a skeleton job to show that sidekiq is working
