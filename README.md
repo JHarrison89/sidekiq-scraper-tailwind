@@ -34,6 +34,7 @@ https://www.codewithjason.com/restart-sidekiq-automatically-deployment/
 ##### Set up Heroku 
 https://devcenter.heroku.com/articles/getting-started-with-rails7#create-a-welcome-page
 - bundle lock --add-platform x86_64-linux
+- https://github.com/heroku/heroku-buildpack-chrome-for-testing
 
 
 #### TODO:
