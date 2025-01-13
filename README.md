@@ -43,6 +43,7 @@ https://devcenter.heroku.com/articles/getting-started-with-rails7#create-a-welco
 - heroku ps:scale worker=1
 - https://github.com/sidekiq/sidekiq/wiki/Using-Redis
 - - heroku config:set REDIS_PROVIDER=REDISCLOUD_URL
+- https://judoscale.com/blog/heroku-free-dynos
 
 
 
