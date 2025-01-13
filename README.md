@@ -37,6 +37,14 @@ https://devcenter.heroku.com/articles/getting-started-with-rails7#create-a-welco
 - https://github.com/heroku/heroku-buildpack-chrome-for-testing
 - https://elements.heroku.com/addons/heroku-redis#pricing
 
+#### Set up Sidekiq
+- Procfile not procfile
+- heroku ps:scale web=1
+- heroku ps:scale worker=1
+- https://github.com/sidekiq/sidekiq/wiki/Using-Redis
+- - heroku config:set REDIS_PROVIDER=REDISCLOUD_URL
+
+
 
 #### TODO:
 * Create a skeleton job to show that sidekiq is working
