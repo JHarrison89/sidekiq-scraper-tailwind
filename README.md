@@ -66,6 +66,7 @@ Documentation is not good for this process, I pieced together these steps using 
   - If the work process is not displayed in Heroku resources after deplying Procfile, run below commands
   - heroku ps:scale web=1
   - heroku ps:scale worker=1
+    - Don't forget to scale down worker after use otherwise it will run 24/7 and use eco dyno hours - see judoscale link for more info 
 
 - USeful guide to heroku eco dynos
   - https://judoscale.com/blog/heroku-free-dynos
