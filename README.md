@@ -14,7 +14,7 @@ Rspec will automaticly create a factories directory when a new model is created 
 
 * configure sidekiq thread pool [here](https://www.rubyguides.com/2015/07/ruby-threads/)
 
-## Configuring emails 
+## Configure emails 
 * https://www.louisramos.dev/blogs/send-mail-on-rails-7-with-gmail
 
 
@@ -32,7 +32,7 @@ Sidekiq needed to be restarted to pick up the new SMTP configs before it could s
 
 * https://www.codewithjason.com/restart-sidekiq-automatically-deployment/
 
-## Set up Heroku 
+## Configure Heroku 
 - https://devcenter.heroku.com/articles/getting-started-with-rails7#create-a-welcome-page
 - - Run `bundle lock --add-platform x86_64-linux` to configure OS
 
@@ -44,7 +44,7 @@ Add `Chrome for testing` buildpack so watir gem can run headless chrome
 Add Heroku redis (free alternatives in judoscale link below)
 - https://elements.heroku.com/addons/heroku-redis#pricing
 
-##### Sidekiq in production
+##### Configure Sidekiq in production
 Documentation is not good for this process, I pieced together these steps using these guide, AI, and lots of google searches. 
 
 - https://gist.github.com/efrapp/1290af276c55086a40c92a3bef9573b5
