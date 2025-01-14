@@ -2,13 +2,13 @@
 ## Install Rspec & FactoryBot 
 Rspec will automaticly create a factories directory when a new model is created e.g scaffold so don't create it manually. I used this guide but placed `config.include FactoryBot::Syntax::Methods` in the `rails_helper.rb` file.
 
+## Configuring Procfile
+* [here](https://railsnotes.xyz/blog/procfile-bin-dev-rails7)
 
-## Sidekiq 
+## Install Sidekiq 
 * Set up Sidekiq guide [here](https://railsnotes.xyz/blog/adding-redis-and-sidekiq-to-a-ruby-on-rails-app)
 
 * Set up Sidekiq monitoring [here](https://github.com/sidekiq/sidekiq/wiki/Monitoring)
-
-* Set up Procfile guide [here](https://railsnotes.xyz/blog/procfile-bin-dev-rails7)
 
 * Reddit post about Sidekiq webscraper [here](spec/models/payment_confirmation_spec.rb)
 
@@ -20,6 +20,7 @@ Rspec will automaticly create a factories directory when a new model is created 
 
 #### Rails credentials VS .ENVS
 * https://thoughtbot.com/blog/switching-from-env-files-to-rails-credentials
+
 I had to recreate my credentials.yml and master key: `rm config/credentials.yml.enc EDITOR="code --wait" bin/rails credentials:edit`
 
 
@@ -29,22 +30,52 @@ Sidekiq needed to be restarted to pick up the new SMTP configs before it could s
 
 > If you made changes to your email configuration (like SMTP settings) or to the job itself, Sidekiq might not pick up those changes until it is restarted. Sidekiq loads the application code when it starts, so any updates to the code or environment variables might require a restart to take effect.
 
-https://www.codewithjason.com/restart-sidekiq-automatically-deployment/
+* https://www.codewithjason.com/restart-sidekiq-automatically-deployment/
 
-##### Set up Heroku 
-https://devcenter.heroku.com/articles/getting-started-with-rails7#create-a-welcome-page
-- bundle lock --add-platform x86_64-linux
+## Set up Heroku 
+- https://devcenter.heroku.com/articles/getting-started-with-rails7#create-a-welcome-page
+- - Run `bundle lock --add-platform x86_64-linux` to configure OS
+
+##### Buildpacks 
+Add `Chrome for testing` buildpack so watir gem can run headless chrome 
 - https://github.com/heroku/heroku-buildpack-chrome-for-testing
+
+#### Add-ons 
+Add Heroku redis (free alternatives in judoscale link below)
 - https://elements.heroku.com/addons/heroku-redis#pricing
 
-#### Set up Sidekiq
-- Procfile not procfile
-- heroku ps:scale web=1
-- heroku ps:scale worker=1
-- https://github.com/sidekiq/sidekiq/wiki/Using-Redis
-- - heroku config:set REDIS_PROVIDER=REDISCLOUD_URL
-- https://judoscale.com/blog/heroku-free-dynos
+##### Sidekiq in production
+Documentation is not good for this process, I pieced together these steps using these guide, AI, and lots of google searches. 
 
+- https://gist.github.com/efrapp/1290af276c55086a40c92a3bef9573b5
+- https://www.dennisokeeffe.com/blog/2022-03-04-getting-started-with-sidekiq-in-rails-7
+
+- Create sidekiq initializer
+  - Guide https://github.com/sidekiq/sidekiq/wiki/Using-Redis   
+  - My file config/initializers/sidekiq.rb
+    - My verison is from Claude.ai and includes REDIS_URL for production and (I think?) falls back to local here config/cable.yml
+  - Deploy and monitor logs for feedback, /sidekiq dashboard will only work if setup correctly.
+       
+- Create a Procfile
+  - spesify web & worker processes
+  - Procfile MUST be capitalised
+  - After deploying, both processes should show in Heroku resourses
+  - Check logs for confirmation of Heroku using Procfile
+ 
+- Scale up (turn on) worker process 
+  - If the work process is not displayed in Heroku resources after deplying Procfile, run below commands
+  - heroku ps:scale web=1
+  - heroku ps:scale worker=1
+
+- USeful guide to heroku eco dynos
+  - https://judoscale.com/blog/heroku-free-dynos
+
+
+
+????
+Do I need this in production? test and remove...
+- - heroku config:set REDIS_PROVIDER=REDISCLOUD_URL
+????
 
 
 #### TODO:
