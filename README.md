@@ -59,7 +59,7 @@ Documentation is not good for this process, I pieced together these steps using 
 - Create a Procfile
   - spesify web & worker processes
   - Procfile MUST be capitalised
-  - After deploying, both processes should show in Heroku resourses
+  - After deploying, web & worker processes should show in Heroku resourses
   - Check logs for confirmation of Heroku using Procfile
  
 - Scale up (turn on) worker process 
