@@ -23,13 +23,12 @@ module ShowPages
         sleep rand(300)
         response = HTTParty.get(url)
 
-        # Parsing the HTML document returned by the server
-        doc = Nokogiri::HTML(response.body)
-
-        # Extract title
-        title = doc.css('.details-header__title').text.strip
-
         if response.code == 200
+          # Parsing the HTML document returned by the server
+          doc = Nokogiri::HTML(response.body)
+
+          # Extract title
+          title = doc.css('.details-header__title').text.strip
 
           # Return object when successful
           return Result.new(

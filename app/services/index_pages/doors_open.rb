@@ -14,6 +14,8 @@ module IndexPages
       # Navigate to the target index
       browser.goto 'https://www.doorsopen.co/jobs/?q=&l=London%2C+UK'
 
+      browser.div(id: 'cookiescript_reject').click if browser.div(id: 'cookiescript_reject').present?
+
       # Loop to click the "Load more" button until it disappears
       while browser.button(visible_text: 'Load more').exists?
         browser.button(visible_text: 'Load more').click
