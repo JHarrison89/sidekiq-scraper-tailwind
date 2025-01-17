@@ -21,15 +21,15 @@ RSpec.describe 'scrape_tasks:scrape_show_pages', type: :task do
     let!(:job_show2) { create(:JobShow, url: 'https://example.com/job2') }
     let!(:job_show3) { create(:JobShow, url: 'https://example.com/job3') }
 
-    it 'enqueues ScrapeJobShowJob for JobShow records not saved as Job' do
-      expect(ScrapeJobShowJob).to receive(:perform_async).with(job_show3.id).once
+    it 'enqueues ScrapeShow for JobShow records not saved as Job' do
+      expect(ScrapeShow).to receive(:perform_async).with(job_show3.id).once
 
       task.invoke
     end
 
     it 'does not enqueue if JobShow URL has been saved as Job' do
-      expect(ScrapeJobShowJob).not_to receive(:perform_async).with(job_show1.id)
-      expect(ScrapeJobShowJob).not_to receive(:perform_async).with(job_show2.id)
+      expect(ScrapeShow).not_to receive(:perform_async).with(job_show1.id)
+      expect(ScrapeShow).not_to receive(:perform_async).with(job_show2.id)
 
       task.invoke
     end
