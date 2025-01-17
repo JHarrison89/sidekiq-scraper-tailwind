@@ -14,7 +14,7 @@ end
 # Tests the show page job. The call to the
 # show page script is stubs to avoid calling
 # out to a real website.
-RSpec.describe ScrapeJobShowJob, type: :job do
+RSpec.describe ScrapeShow, type: :job do
   include ActiveSupport::Testing::TimeHelpers
 
   describe '#perform' do
