@@ -10,18 +10,8 @@ namespace :tasks do
 
   desc 'Scrape show pages'
   task scrape_show_pages: :environment do
-    if Rails.env.production?
-      system('heroku ps:scale worker=1')
-      puts 'Worker up'
-    end
-
     job_urls = Job.all.pluck(:url)
     pages_to_scrape = JobShow.where.not(url: job_urls)
     pages_to_scrape.each { ScrapeShow.perform_async(_1.id) }
-
-    if Rails.env.production?
-      system('heroku ps:scale worker=0')
-      puts 'Worker down'
-    end
   end
 end
