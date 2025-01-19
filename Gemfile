@@ -96,3 +96,6 @@ gem "tailwindcss-rails", "~> 2.7"
 
 # Make avaible to production & development
 gem 'faker'
+
+# Heroku platform API
+gem 'platform-api'
