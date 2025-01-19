@@ -75,6 +75,14 @@ Documentation is not good for this process, I pieced together these steps using 
   - https://judoscale.com/blog/heroku-free-dynos
 
 
+### Configure DataDog
+- I set up basic DataDog following step in the official doc below; other guide is useful as a reference
+
+- Official docs [https://docs.datadoghq.com/agent/guide/heroku-ruby/#sidekiq](https://docs.datadoghq.com/agent/guide/heroku-ruby/#prerequisites)
+- - Postgres integration, links out to  [buildpack documentation](https://docs.datadoghq.com/agent/basic_agent_usage/heroku/#enabling-integrations), this seems to contain steps on more detailed intergrations. 
+- Other guide https://danielabaron.me/blog/datadog-heroku-rails/#install-buildpack
+- Sidekiq monitoring [not available on free plan](https://docs.datadoghq.com/agent/guide/heroku-ruby/#sidekiq)
+
 
 ????
 Do I need this in production? test and remove...
