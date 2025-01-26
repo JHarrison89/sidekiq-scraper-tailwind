@@ -4,6 +4,6 @@ FactoryBot.define do
   factory :JobShow do
     company { Faker::Company.name }
     url { Faker::Internet.url }
-    script { 'JobShowPageScript' }
+    script { 'ShowPageScript' }
   end
 end
