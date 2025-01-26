@@ -119,6 +119,7 @@ GEM
       moneta
       multi_json (>= 1.9.2)
       webrick
+    htmlbeautifier (1.4.2)
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -315,6 +316,7 @@ DEPENDENCIES
   debug
   factory_bot_rails
   faker
+  htmlbeautifier
   httparty
   importmap-rails
   jbuilder
