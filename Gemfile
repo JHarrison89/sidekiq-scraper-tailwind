@@ -101,3 +101,5 @@ gem 'faker'
 
 # Heroku platform API
 gem 'platform-api'
+
+gem 'loofah'

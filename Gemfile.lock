@@ -320,6 +320,7 @@ DEPENDENCIES
   httparty
   importmap-rails
   jbuilder
+  loofah
   nokogiri
   pg (~> 1.1)
   platform-api
