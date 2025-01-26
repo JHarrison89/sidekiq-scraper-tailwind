@@ -8,8 +8,11 @@ class SaveJob
     # Update with latest attributes
     job.update(
       company_name: attributes.company_name,
+      url: attributes.url,
       title: attributes.title,
-      url: attributes.url
+      employer: attributes.employer,
+      location: attributes.location,
+      html_content: attributes.html_content
     )
   end
 end
