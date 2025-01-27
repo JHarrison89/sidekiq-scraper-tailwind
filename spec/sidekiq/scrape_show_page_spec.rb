@@ -7,7 +7,7 @@ require 'sidekiq/testing'
 # custom designed to scrape the
 # show page of a site
 # e.g doorsopen.com
-class JobShowPageScript
+class ShowPageScript
   def self.call(url); end
 end
 
@@ -18,8 +18,8 @@ RSpec.describe ScrapeShow, type: :job do
   include ActiveSupport::Testing::TimeHelpers
 
   describe '#perform' do
-    let(:attributes) { OpenStruct.new(company_name: 'NVS', title: 'Ticketing Manager', url: 'url') }
-    let(:script) { JobShowPageScript }
+    let(:attributes) { OpenStruct.new(company_name: 'Job Board', url: 'url', title: 'Ticketing Manager', employer: "NVS", location: "London", html_content: "<p>Hello World</p>" ) }
+    let(:script) { ShowPageScript }
     let(:job_show) { create(:JobShow) }
 
     before { allow(script).to receive(:call).and_return(attributes) }
@@ -31,8 +31,11 @@ RSpec.describe ScrapeShow, type: :job do
 
         expect(Job.last).to have_attributes(
           company_name: attributes.company_name,
+          url: attributes.url,
           title: attributes.title,
-          url: attributes.url
+          employer: attributes.employer,
+          location: attributes.location,
+          html_content: attributes.html_content
         )
       end
 
