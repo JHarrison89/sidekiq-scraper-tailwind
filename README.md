@@ -85,6 +85,8 @@ Documentation is not good for this process, I pieced together these steps using 
 
 ### Configure Bugsnag
 - https://docs.bugsnag.com/platforms/ruby/rails/#basic-configuration
+- Stored BUGSNAG_API_KEY in the Rails credentials file
+- Added secret key ENV VAR to Heroku to give access to Rails credentials file
 
 
 
