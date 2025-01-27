@@ -27,7 +27,7 @@ Rspec will automaticly create a factories directory when a new model is created 
 I had to recreate my credentials.yml and master key: `rm config/credentials.yml.enc EDITOR="code --wait" bin/rails credentials:edit`
 
 
-Sending emails with Sidekiq 
+#### Sending emails with Sidekiq 
 Because we've installed Sidekiq as our jobs queue, we use to it send emails. 
 Sidekiq needed to be restarted to pick up the new SMTP configs before it could send emails.
 
@@ -82,6 +82,13 @@ Documentation is not good for this process, I pieced together these steps using 
 - - Postgres integration, links out to  [buildpack documentation](https://docs.datadoghq.com/agent/basic_agent_usage/heroku/#enabling-integrations), this seems to contain steps on more detailed intergrations. 
 - Other guide https://danielabaron.me/blog/datadog-heroku-rails/#install-buildpack
 - Sidekiq monitoring [not available on free plan](https://docs.datadoghq.com/agent/guide/heroku-ruby/#sidekiq)
+
+### Configure Bugsnag
+- https://docs.bugsnag.com/platforms/ruby/rails/#basic-configuration
+
+
+
+
 
 
 ????
