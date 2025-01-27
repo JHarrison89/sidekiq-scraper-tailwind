@@ -71,7 +71,7 @@ Documentation is not good for this process, I pieced together these steps using 
   - heroku ps:scale worker=1
     - Don't forget to scale down worker after use otherwise it will run 24/7 and use eco dyno hours - see judoscale link for more info 
 
-- USeful guide to heroku eco dynos
+- Useful guide to heroku eco dynos
   - https://judoscale.com/blog/heroku-free-dynos
 
 
@@ -86,7 +86,8 @@ Documentation is not good for this process, I pieced together these steps using 
 ### Configure Bugsnag
 - https://docs.bugsnag.com/platforms/ruby/rails/#basic-configuration
 - Stored BUGSNAG_API_KEY in the Rails credentials file
-- Added secret key ENV VAR to Heroku to give access to Rails credentials file
+- Added RAILS_MASTER_KEY ENV to Heroku to give access to Rails credentials file
+- - https://medium.com/craft-academy/encrypted-credentials-in-ruby-on-rails-9db1f36d8570
 
 
 
