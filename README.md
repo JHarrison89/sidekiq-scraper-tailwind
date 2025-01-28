@@ -91,7 +91,7 @@ Documentation is not good for this process, I pieced together these steps using 
 
 
 
-
+### Add notes about using Loofah & Selenium to scrape
 
 
 ????
