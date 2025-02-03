@@ -94,6 +94,14 @@ Documentation is not good for this process, I pieced together these steps using 
 ### Add notes about using Loofah & Selenium to scrape
 
 
+### Heroku API key refreshed every month/year 
+- Expired API key was causing selenium-webdriver to throw error when creating temp directory???
+
+
+Selenium::WebDriver 
+session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir"
+
+
 ????
 Do I need this in production? test and remove...
 - - heroku config:set REDIS_PROVIDER=REDISCLOUD_URL
