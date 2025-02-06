@@ -116,21 +116,27 @@ https://docs.bugsnag.com/platforms/ruby/rails/#basic-configuration
 
 ## Web scraping
 
-#### Rundown of tools
+#### Web Scraping Libraries
 - [Httparty](https://github.com/jnunemaker/httparty) makes simple HTTP requests. Does not load JS or interact with JS elements on webpages.
 - [Selenium](https://www.selenium.dev/) Can interact with JavaScript-rendered pages and supports user interactions (clicks, form submissions, scrolling). Requires careful setup to avoid concurrency issues.
+- [Watir](https://github.com/watir/watir) Built on top of Selenium but offers a **simpler API** , it supports JavaScript rendering and user interactions and works with headless and non-headless browsers . More stable and intuitive than raw Selenium for automation
 - [Ferrum](https://github.com/rubycdp/ferrum)  Headless Chrome-based scraping without Selenium dependencies , Faster than Selenium (doesn't require a WebDriver), Lightweight and Ruby-native, Supports JavaScript execution and DOM interactions & no concurrency issues by default
+
+#### HTML Parsers
+- [Nokogiri](https://rubygems.org/gems/nokogiri/versions/1.16.7?locale=en) is **extremely fast** at parsing and extracting data, **lightweight** as it doesn’t require a browser or JavaScript engine, works seamlessly with **static HTML** from sources like HTTParty or open files, and supports **XPath** and **CSS selectors** for precise data extraction. Give us access to **CSS selectors** and **XPath**, parsing makes it easy to **search and extract specific elements**,
+
+##### HTML Sanitizers
 - [Loofah](https://github.com/flavorjones/loofah) gem is a **sanitization and HTML/XML manipulation library** for Ruby, built on **Nokogiri**, primarily used for **scrubbing and cleaning untrusted HTML** to prevent security vulnerabilities like XSS. I cleans up HTML, removes whitespaces, classes, styles and links.
 
 
-#### Selenium VS Ferrum explained 
+#### Selenium concurrency issues
 When using Selenium with Chrome, each browser instance typically starts with a user data directory that holds profile data (like cookies, cache, extensions, etc.). When you run multiple instances concurrently—say, in parallel Sidekiq jobs—if they share the same user data directory, you can run into conflicts such as:
 
 -   **Locking Issues:** Chrome might lock the profile directory for one instance, preventing another instance from accessing it.
 -   **State Contamination:** Instances might interfere with each other by sharing cookies or cache data, leading to inconsistent behavior.
 -   **Startup Failures:** As you've experienced, errors like `"session not created: probably user data directory is already in use..."` occur because multiple processes are trying to access or lock the same resource simultaneously.
 
-### Why Ferrum is better
+#### Why Ferrum is better
 
 **Ferrum** (and by extension, **Capybara::Cuprite**) takes a different approach. Instead of launching a full browser instance that relies on a persistent user profile on disk, Ferrum communicates with a headless Chrome instance through the Chrome DevTools Protocol (CDP). Here’s why that can be advantageous in concurrent environments:
 
@@ -146,12 +152,28 @@ When using Selenium with Chrome, each browser instance typically starts with a u
 4.  **Faster Startup and Teardown:**  
     The lack of persistent disk state can lead to quicker startup times because there’s no overhead of loading a user profile from disk. When the job completes, the browser session can be terminated without worrying about cleaning up on-disk data.
 
+#### Documenting my intial experiences web scraping and why I moved from  Selenium to Ferrum
 
-## TODO
+##### Scraping index pages
+Index pages often contain buttons to load more content, or other types of navigation, so I've used the **Watir gem** to interact with the webpage
+
+##### Scraping show pages
+Initaly used **Httparty** to download the HTML and **Nokugiri** for parsing but these tools didnt work on the Broadwick (Workable) site because its heavly relient on JS. 
+
+To solve this, I tried using Selenium, but ran in to the concurrency issue when I deployed to production. I resolved the issue by creating a new temp directory for each worker, but kept seeing the same error. Unfortunatly, my Heroku API key had expired around the same time, which also blocked Selenium from writing so I kept seeing the same error even when the script was correct. 
+
+Error message: 
+`session not created: probably user data directory is already in use`
+
+
+
+
+
+
 - Link to gist of Selenium Broadwick rb
-- Add section here on `session not created: probably user data directory is already in use`
 - Add link to https://railsnotes.xyz/blog/ferrum-stealth-browsing
 - Include note on having to add sandbox option to get Ferrum to run in production.
+- Notes on inital project set up using https://book.hotwiringrails.com/
 
 ?
 Selenium::WebDriver 
