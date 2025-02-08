@@ -1,3 +1,4 @@
+
 ## TODO - 
 - Document project setup e.g tailwind, importmaps etc
 - - look at early commits
@@ -116,20 +117,20 @@ https://docs.bugsnag.com/platforms/ruby/rails/#basic-configuration
 
 ## Web scraping
 
-#### Web Scraping Libraries
+### Web Scraping Libraries
 - [Httparty](https://github.com/jnunemaker/httparty) makes simple HTTP requests. Does not load JS or interact with JS elements on webpages.
 - [Selenium](https://www.selenium.dev/) Can interact with JavaScript-rendered pages and supports user interactions (clicks, form submissions, scrolling). Requires careful setup to avoid concurrency issues.
 - [Watir](https://github.com/watir/watir) Built on top of Selenium but offers a **simpler API** , it supports JavaScript rendering and user interactions and works with headless and non-headless browsers . More stable and intuitive than raw Selenium for automation
 - [Ferrum](https://github.com/rubycdp/ferrum)  Headless Chrome-based scraping without Selenium dependencies , Faster than Selenium (doesn't require a WebDriver), Lightweight and Ruby-native, Supports JavaScript execution and DOM interactions & no concurrency issues by default
 
-#### HTML Parsers
+### HTML Parsers
 - [Nokogiri](https://rubygems.org/gems/nokogiri/versions/1.16.7?locale=en) is **extremely fast** at parsing and extracting data, **lightweight** as it doesn’t require a browser or JavaScript engine, works seamlessly with **static HTML** from sources like HTTParty or open files, and supports **XPath** and **CSS selectors** for precise data extraction. Give us access to **CSS selectors** and **XPath**, parsing makes it easy to **search and extract specific elements**,
 
-##### HTML Sanitizers
+### HTML Sanitizers
 - [Loofah](https://github.com/flavorjones/loofah) gem is a **sanitization and HTML/XML manipulation library** for Ruby, built on **Nokogiri**, primarily used for **scrubbing and cleaning untrusted HTML** to prevent security vulnerabilities like XSS. I cleans up HTML, removes whitespaces, classes, styles and links.
 
 
-#### Selenium concurrency issues
+### Selenium concurrency issues
 When using Selenium with Chrome, each browser instance typically starts with a user data directory that holds profile data (like cookies, cache, extensions, etc.). When you run multiple instances concurrently—say, in parallel Sidekiq jobs—if they share the same user data directory, you can run into conflicts such as:
 
 -   **Locking Issues:** Chrome might lock the profile directory for one instance, preventing another instance from accessing it.
@@ -152,36 +153,39 @@ When using Selenium with Chrome, each browser instance typically starts with a u
 4.  **Faster Startup and Teardown:**  
     The lack of persistent disk state can lead to quicker startup times because there’s no overhead of loading a user profile from disk. When the job completes, the browser session can be terminated without worrying about cleaning up on-disk data.
 
-#### Documenting my intial experiences web scraping and why I moved from  Selenium to Ferrum
+### My intial experiences web scraping and why I moved from  Selenium to Ferrum
 
-##### Scraping index pages
+#### Scraping index pages
 Index pages often contain buttons to load more content, or other types of navigation, so I've used the **Watir gem** to interact with the webpage
 
-##### Scraping show pages
-Initaly used **Httparty** to download the HTML and **Nokugiri** for parsing but these tools didnt work on the Broadwick (Workable) site because its heavly relient on JS. 
+#### Scraping show pages
+Initaly used **Httparty** and **Nokugiri**, but **Httparty** to scrape DoorsOpen, but this setup didnt work on the Broadwick (Workable) site because its heavly relient on JS. 
 
-To solve this, I tried using Selenium, but ran in to the concurrency issue when I deployed to production. I resolved the issue by creating a new temp directory for each worker, but kept seeing the same error. Unfortunatly, my Heroku API key had expired around the same time, which also blocked Selenium from writing so I kept seeing the same error even when the script was correct. 
+To solve this, I tried using **Selenium**, but ran in to concurrency issues when running multiple instances in Sidekick jobs in production. 
+
+The fix was to create a new temp directory for each worker which did work, but due to my Heroku API key expiring around the same time which also blocked Selenium from writing so I kept seeing the same error message. 
 
 Error message: 
-`session not created: probably user data directory is already in use`
+`Selenium::WebDriver 
+session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir"`
+
+#### Moving to Ferrum
+After a few days of not making progress on this issue, I decided to try out **Ferrum**. 
+**Ferrum** is ruby native, and has a really clean and easy to use API, so I was able to get it up and running quickly with less dependencies than **Selenium** and because its  ephemeral the concurrency issue did not occure. 
+
+I alo found a great guide to web scraping with **Ferrum ** which details how to change request headers to look more "real", and set up a IP proxy amounst other tips. 
+
+Note: For some reason, Ferrum needs the no sandbox flag run in production.
+`Ferrum::Browser.new(browser_options: { 'no-sandbox': nil })`
+
+#### Ferrum scraping guide
+- https://railsnotes.xyz/blog/ferrum-stealth-browsing
+- - PDF copy saved in Google Drive
+
+#### Gist of Selenium scrip for Broadwick live
+- https://gist.github.com/JHarrison89/f7bf49ca08aafc3c14d82aaf640135a9
+- [Commit link](https://github.com/JHarrison89/sidekiq-scraper-tailwind/blob/c320b915a295b4528782bc233ac0d396a21d4748/app/services/show_pages/broadwick.rb)
 
 
 
-
-
-
-- Link to gist of Selenium Broadwick rb
-- Add link to https://railsnotes.xyz/blog/ferrum-stealth-browsing
-- Include note on having to add sandbox option to get Ferrum to run in production.
 - Notes on inital project set up using https://book.hotwiringrails.com/
-
-?
-Selenium::WebDriver 
-session not created: probably user data directory is already in use, please specify a unique value for --user-data-dir argument, or don't use --user-data-dir"
-
-
-????
-Do I need this in production? test and remove...
-- - heroku config:set REDIS_PROVIDER=REDISCLOUD_URL
-????
-
