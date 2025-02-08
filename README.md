@@ -3,6 +3,7 @@
 - Document project setup e.g tailwind, importmaps etc
 - - look at early commits
 - Clean up `config.include FactoryBot::Syntax::Methods`
+- [Authentication zero](https://github.com/JHarrison89/sidekiq-scraper/pull/9/commits/f64fe945b8dcb992268d41d01bc1ff419b7ee89d)
 
 
 ## Install Rspec & FactoryBot 
