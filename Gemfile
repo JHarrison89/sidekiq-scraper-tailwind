@@ -105,3 +105,5 @@ gem 'platform-api'
 gem 'loofah'
 
 gem "bugsnag", "~> 6.27"
+
+gem "ferrum"

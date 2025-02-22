@@ -1,40 +1,57 @@
 # frozen_string_literal: true
 
-require 'httparty'
 require 'nokogiri'
+require 'ferrum'
 
 module ShowPages
   # Scraps a webpage and returns
   # an object with job attributes
   class Broadwick
-    Result = Struct.new(
-      :company_name,
-      :url,
-      :title,
-      keyword_init: true
-    )
-
     def self.call(url)
       attempts = 0
       max_attempts = 3
 
       while attempts < max_attempts
-        # Downloading target web page
-        sleep rand(150)
-        response = HTTParty.get(url)
+        sleep rand(120)
+        browser = Ferrum::Browser.new(browser_options: { 'no-sandbox': nil })
+        browser.goto(url)
 
-        if response.code == 200
-          # Parsing the HTML document returned by the server
-          doc = Nokogiri::HTML(response.body)
+        sleep 2.seconds
 
-          # Extract title
-          title = doc.title
+        if browser.network.status == 200
+          begin
+            title = browser.at_css('[data-ui="job-title"]').text
+            location = browser.at_css('[data-ui="job-location"]').text
+
+            body = Nokogiri::HTML(browser.body)
+
+            body = body.css('[data-ui="job-description"]').to_html
+            body = Loofah.html5_fragment(body)
+                         .scrub!(:prune)
+                         .scrub!(:escape)
+                         .scrub!(:whitewash)
+                         .scrub!(:unprintable)
+                         .scrub!(:targetblank)
+                         .scrub!(:noreferrer)
+                         .to_html
+                         .squish
+
+            body = body.gsub('<p>', '<p class="mt-6 text-sm/6 text-gray-600">')
+            body = body.gsub('<ul>', '<ul class="list-outside list-disc text-gray-900 dark:text-gray-200">')
+            body = body.gsub('<li>', '<li class="mt-2">')
+
+          ensure
+            browser.quit
+          end
 
           # Return object when successful
-          return Result.new(
+          return OpenStruct.new(
             company_name: 'Broadwick',
             url:,
-            title:
+            title:,
+            employer: 'Broadwick',
+            location:,
+            html_content: body,
           )
         else
           sleep rand(150)
