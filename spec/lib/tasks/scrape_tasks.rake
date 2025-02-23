@@ -2,6 +2,8 @@
 require 'rails_helper'
 require 'rake'
 
+
+# Tests the scrape_show_pages rake task functionality
 RSpec.describe 'scrape_tasks:scrape_show_pages', type: :task do
   before :all do
     Rake.application.rake_require('tasks/scrape_tasks')
@@ -15,11 +17,15 @@ RSpec.describe 'scrape_tasks:scrape_show_pages', type: :task do
   end
 
   describe 'scrape_show_pages' do
-    let!(:job1) { create(:job, url: 'https://example.com/job1') }
-    let!(:job2) { create(:job, url: 'https://example.com/job2') }
+    # Show page records
     let!(:job_show1) { create(:JobShow, url: 'https://example.com/job1') }
     let!(:job_show2) { create(:JobShow, url: 'https://example.com/job2') }
     let!(:job_show3) { create(:JobShow, url: 'https://example.com/job3') }
+
+
+    # Persisted Job records
+    let!(:job1) { create(:job, url: 'https://example.com/job1') }
+    let!(:job2) { create(:job, url: 'https://example.com/job2') }
 
     it 'enqueues ScrapeShow for JobShow records not saved as Job' do
       expect(ScrapeShow).to receive(:perform_async).with(job_show3.id).once
