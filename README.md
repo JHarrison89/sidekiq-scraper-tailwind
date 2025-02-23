@@ -1,5 +1,13 @@
 
 ## TODO - 
+
+https://github.com/rails/rails/tree/main/activestorage
+https://github.com/rails/rails/blob/main/activestorage/app/models/active_storage/blob.rb
+https://github.com/rails/rails/blob/main/activestorage/app/models/active_storage/attachment.rb
+
+https://www.honeybadger.io/blog/rails-app-aws-s3/
+
+https://github.com/Shopify/maintenance_tasks
 - Document project setup e.g tailwind, importmaps etc
 - - look at early commits
 - Clean up `config.include FactoryBot::Syntax::Methods`
