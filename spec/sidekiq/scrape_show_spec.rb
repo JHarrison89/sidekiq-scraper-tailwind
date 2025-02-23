@@ -18,7 +18,16 @@ RSpec.describe ScrapeShow, type: :job do
   include ActiveSupport::Testing::TimeHelpers
 
   describe '#perform' do
-    let(:attributes) { OpenStruct.new(company_name: 'Job Board', url: 'url', title: 'Ticketing Manager', employer: "NVS", location: "London", html_content: "<p>Hello World</p>" ) }
+    let(:attributes) do
+      OpenStruct.new(
+        board: 'Job Board',
+        url: 'url',
+        title: 'Ticketing Manager',
+        employer: 'NVS',
+        location: 'London',
+        html_content: '<p>Hello World</p>'
+      )
+    end
     let(:script) { ShowPageScript }
     let(:job_show) { create(:JobShow) }
 

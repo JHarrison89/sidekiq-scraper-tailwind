@@ -26,7 +26,7 @@ module IndexPages
 
       browser.elements(tag_name: 'article').each do |article|
         JobShow.find_or_create_by(
-          company: 'DoorsOpen',
+          board: 'DoorsOpen',
           url: article.a.href,
           script: ShowPages::DoorsOpen.name
         )
