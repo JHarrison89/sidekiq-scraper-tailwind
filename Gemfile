@@ -1,7 +1,7 @@
-source "https://rubygems.org"
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+# source "https://rubygems.org"
+# git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.2"
+# ruby "3.1.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.0"
@@ -52,24 +52,24 @@ gem "bootsnap", require: false
 gem "sidekiq", "~> 7.2"
 
 # Perform HTTP requests & retrieve HTML documents
-gem 'httparty'
+gem "httparty"
 
 # Parse HTML pages, select HTML elements, and extract data.
-gem 'nokogiri'
+gem "nokogiri"
 
 # Watir interacts with a browser the same way people do
-gem 'watir'
+gem "watir"
 
 # # Browser automation framework
 # gem 'webdrivers'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'debug', platforms: %i[ mri mingw x64_mingw ]
-  gem 'factory_bot_rails'
-  gem 'rspec-rails'
-  gem 'pry-rails'
-  gem 'pry-byebug'
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "factory_bot_rails"
+  gem "rspec-rails"
+  gem "pry-rails"
+  gem "pry-byebug"
   gem "authentication-zero", "~> 3.0"
 end
 
@@ -77,7 +77,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
-  gem 'htmlbeautifier'
+  gem "htmlbeautifier"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -97,15 +97,17 @@ gem "bcrypt", "~> 3.1.7"
 gem "tailwindcss-rails"
 
 # Make avaible to production & development
-gem 'faker'
+gem "faker"
 
 # Heroku platform API
-gem 'platform-api'
+gem "platform-api"
 
-gem 'loofah'
+gem "loofah"
 
 gem "bugsnag", "~> 6.27"
 
 gem "ferrum"
 
-gem 'aws-sdk-s3'
+gem "aws-sdk-s3"
+
+gem "rubocop"
