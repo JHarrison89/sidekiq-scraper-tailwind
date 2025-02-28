@@ -1,7 +1,12 @@
 FactoryBot.define do
   factory :job do
-    board { 'Big Company Inc' }
-    title { 'Head of ticketing' }
+
     url { 'bigcompany.com/job' }
+    title { 'Head of ticketing' }
+    location { 'London' }
+    html_content { '<p>Job description</p>' }
+    board { 'Jobs board' }
+
+    employer { create(:employer) }
   end
 end
