@@ -2,9 +2,8 @@
 
 # Ceates or updates a job record
 class SaveJob
-  def self.call(attributes)
+  def self.call(employer:, attributes:)
     job = Job.find_or_create_by(url: attributes.url)
-    employer = Employer.find_or_create_by(name: attributes.employer)
 
     # Update with latest attributes
     job.update(
