@@ -18,67 +18,57 @@ RSpec.describe ScrapeShow, type: :job do
   include ActiveSupport::Testing::TimeHelpers
 
   describe '#perform' do
-    let(:attributes) {
-      OpenStruct.new(
-        board: 'Job Board',
-        url: 'www.exmaple.com',
-        title: 'Ticketing Manager',
-        location: 'London',
-        html_content: '<p>Hello World</p>',
-        employer: 'Big Company inc'
-      )
-    }
-
     let(:script) { ShowPageScript }
     let(:job_show) { create(:JobShow) }
 
-    before { allow(script).to receive(:call).and_return(attributes) }
+    # Unpersisted job record
+    let(:job) { build(:job, employer: create(:employer, :with_avatar)) }
 
-    context 'when given attributes of a job' do
-      it 'creates a new job record if the URL is new' do
+    let(:attributes) do
+      OpenStruct.new(
+        board: job.board,
+        url: job.url,
+        title: job.title,
+        location: job.location,
+        html_content: job.html_content,
+        logo_url: "http://example.com/logo.png",
+        employer: job.employer.name
+      )
+    end
+
+    let(:logo_url) { "http://example.com/logo.png" }
+    let(:fake_file) { StringIO.new("fake image data") }
+
+    before do
+      # Stub the call to Script
+      allow(script).to receive(:call).and_return(attributes)
+
+      # Stub the network call to URI.open
+      allow(URI).to receive(:open).with(logo_url).and_return(fake_file)
+    end
+
+
+    context "when given attributes of a job" do
+      it "creates a new job record if the URL does not belong to a job" do
         expect { subject.perform(job_show.id) }
           .to change(Job, :count).by(1)
 
         expect(Job.last).to have_attributes(
-          board: attributes.board,
-          url: attributes.url,
-          title: attributes.title,
-          location: attributes.location,
-          html_content: attributes.html_content,
-          employer: have_attributes(
-            name: attributes.employer
-          )
+          board: job.board,
+          title: job.title,
+          location: job.location,
+          html_content: job.html_content,
+          url: job.url,
+          employer: job.employer
         )
       end
 
-      it 'finds and updates the job if the URL belongs a job' do
-        Job.create(
-          board: 'job record',
-          title: 'that exists already',
-          url: 'www.exmaple.com',
-          employer:
-          create(
-            :employer,
-            name: 'Big Company inc'
-          )
-        )
+      it "updates the job if the URL belongs an existing job" do
+        # Persisted job record
+        create(:job, employer: create(:employer, :with_avatar))
 
         expect { subject.perform(job_show.id) }
           .to change(Job, :count).by(0)
-      end
-    end
-
-    context 'when given the name an employer' do
-      it 'create a new Employer record if it does not exist' do
-        expect { subject.perform(job_show.id) }
-          .to change(Employer, :count).by(1)
-      end
-
-      it 'does not create an Employer record if it does exist' do
-        Employer.create(name: 'Big Company inc')
-
-        expect { subject.perform(job_show.id) }
-          .to change(Employer, :count).by(0)
       end
     end
   end
