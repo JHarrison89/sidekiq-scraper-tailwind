@@ -44,7 +44,10 @@ RSpec.describe ScrapeShow, type: :job do
           url: attributes.url,
           title: attributes.title,
           location: attributes.location,
-          html_content: attributes.html_content
+          html_content: attributes.html_content,
+          employer: have_attributes(
+            name: attributes.employer
+          )
         )
       end
 
@@ -52,11 +55,30 @@ RSpec.describe ScrapeShow, type: :job do
         Job.create(
           board: 'job record',
           title: 'that exists already',
-          url: 'www.exmaple.com'
+          url: 'www.exmaple.com',
+          employer:
+          create(
+            :employer,
+            name: 'Big Company inc'
+          )
         )
 
         expect { subject.perform(job_show.id) }
           .to change(Job, :count).by(0)
+      end
+    end
+
+    context 'when given the name an employer' do
+      it 'create a new Employer record if it does not exist' do
+        expect { subject.perform(job_show.id) }
+          .to change(Employer, :count).by(1)
+      end
+
+      it 'does not create an Employer record if it does exist' do
+        Employer.create(name: 'Big Company inc')
+
+        expect { subject.perform(job_show.id) }
+          .to change(Employer, :count).by(0)
       end
     end
   end
