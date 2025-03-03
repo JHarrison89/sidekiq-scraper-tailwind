@@ -75,6 +75,22 @@ GEM
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     authentication-zero (3.0.2)
+    aws-eventstream (1.2.0)
+    aws-partitions (1.677.0)
+    aws-sdk-core (3.168.4)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.651.0)
+      aws-sigv4 (~> 1.5)
+      jmespath (~> 1, >= 1.6.1)
+    aws-sdk-kms (1.61.0)
+      aws-sdk-core (~> 3, >= 3.165.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.117.2)
+      aws-sdk-core (~> 3, >= 3.165.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.4)
+    aws-sigv4 (1.5.2)
+      aws-eventstream (~> 1, >= 1.0.2)
     base64 (0.2.0)
     bcrypt (3.1.20)
     benchmark (0.4.0)
@@ -149,6 +165,7 @@ GEM
     jbuilder (2.13.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jmespath (1.6.2)
     logger (1.6.5)
     loofah (2.24.0)
       crass (~> 1.0.2)
@@ -333,6 +350,7 @@ PLATFORMS
 
 DEPENDENCIES
   authentication-zero (~> 3.0)
+  aws-sdk-s3
   bcrypt (~> 3.1.7)
   bootsnap
   bugsnag (~> 6.27)
