@@ -20,8 +20,8 @@ Rspec will automaticly create a factories directory when a new model is created 
 ## Configure Procfile
 * [here](https://railsnotes.xyz/blog/procfile-bin-dev-rails7)
 
-## Install Sidekiq 
-* Set up Sidekiq guide [here](https://railsnotes.xyz/blog/adding-redis-and-sidekiq-to-a-ruby-on-rails-app)
+## Install Redis & Sidekiq
+* Redis & Sidekiq guide [here](https://railsnotes.xyz/blog/adding-redis-and-sidekiq-to-a-ruby-on-rails-app)
 
 * Set up Sidekiq monitoring [here](https://github.com/sidekiq/sidekiq/wiki/Monitoring)
 
