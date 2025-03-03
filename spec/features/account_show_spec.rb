@@ -1,7 +1,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Job show' do
+RSpec.describe 'Account show' do
   it 'groups jobs by created_at and lists them correctly', :js do
     # Friday 2024, January 31st
     travel_to Time.zone.local(2025, 1, 31)
