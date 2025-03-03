@@ -4,6 +4,7 @@
 class SaveJob
   def self.call(attributes)
     job = Job.find_or_create_by(url: attributes.url)
+    employer = Employer.find_or_create_by(name: attributes.employer)
 
     # Update with latest attributes
     job.update(
@@ -11,7 +12,8 @@ class SaveJob
       url: attributes.url,
       title: attributes.title,
       location: attributes.location,
-      html_content: attributes.html_content
+      html_content: attributes.html_content,
+      employer:
     )
   end
 end

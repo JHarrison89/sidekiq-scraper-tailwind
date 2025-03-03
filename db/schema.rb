@@ -42,6 +42,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_23_174401) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "employers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "job_shows", force: :cascade do |t|
     t.string "board"
     t.string "url"
@@ -69,6 +75,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_23_174401) do
     t.datetime "updated_at", null: false
     t.string "location"
     t.text "html_content"
+    t.bigint "employer_id"
+    t.index ["employer_id"], name: "index_jobs_on_employer_id"
   end
 
   create_table "jobs_users", id: false, force: :cascade do |t|
@@ -100,5 +108,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_23_174401) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "job_users", "jobs"
   add_foreign_key "job_users", "users"
+  add_foreign_key "jobs", "employers"
   add_foreign_key "sessions", "users"
 end
