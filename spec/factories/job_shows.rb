@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :JobShow do
-    company { Faker::Company.name }
+    board { Faker::Company.name }
     url { Faker::Internet.url }
     script { 'ShowPageScript' }
   end

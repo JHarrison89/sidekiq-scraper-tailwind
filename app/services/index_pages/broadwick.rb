@@ -17,7 +17,7 @@ module IndexPages
       # Find and save jobs
       browser.elements(class_name: 'whr-item').each do |job|
         JobShow.find_or_create_by(
-          company: 'Broadwick',
+          board: 'Broadwick',
           url: job.a.href,
           script: ShowPages::Broadwick.name
         )

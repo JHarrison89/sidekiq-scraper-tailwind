@@ -18,36 +18,45 @@ RSpec.describe ScrapeShow, type: :job do
   include ActiveSupport::Testing::TimeHelpers
 
   describe '#perform' do
-    let(:attributes) { OpenStruct.new(company_name: 'Job Board', url: 'url', title: 'Ticketing Manager', employer: "NVS", location: "London", html_content: "<p>Hello World</p>" ) }
+    let(:attributes) {
+      OpenStruct.new(
+        board: 'Job Board',
+        url: 'www.exmaple.com',
+        title: 'Ticketing Manager',
+        location: 'London',
+        html_content: '<p>Hello World</p>',
+        employer: 'Big Company inc'
+      )
+    }
+
     let(:script) { ShowPageScript }
     let(:job_show) { create(:JobShow) }
 
     before { allow(script).to receive(:call).and_return(attributes) }
 
-    context 'when given attributes of a new job' do
-      it 'creates a new job record' do
+    context 'when given attributes of a job' do
+      it 'creates a new job record if the URL is new' do
         expect { subject.perform(job_show.id) }
           .to change(Job, :count).by(1)
 
         expect(Job.last).to have_attributes(
-          company_name: attributes.company_name,
+          board: attributes.board,
           url: attributes.url,
           title: attributes.title,
-          employer: attributes.employer,
           location: attributes.location,
           html_content: attributes.html_content
         )
       end
 
-      describe 'when give attributes of an existing job' do
-        it 'finds and updates the job' do
-          travel_to(1.month.ago)
-          Job.create(company_name: 'job record', title: 'that exists already', url: 'url')
-          travel_back
+      it 'finds and updates the job if the URL belongs a job' do
+        Job.create(
+          board: 'job record',
+          title: 'that exists already',
+          url: 'www.exmaple.com'
+        )
 
-          expect { subject.perform(job_show.id) }
-            .to change(Job, :count).by(0)
-        end
+        expect { subject.perform(job_show.id) }
+          .to change(Job, :count).by(0)
       end
     end
   end
