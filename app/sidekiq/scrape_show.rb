@@ -15,7 +15,13 @@ class ScrapeShow
     # Early return if script return nil
     return if attributes.nil?
 
-    # Find or create job record
-    SaveJob.call(attributes)
+    # Find or create an employer
+    employer = SetEmployer.call(
+      name: attributes.employer,
+      logo_url: attributes.logo_url
+    )
+
+    # Find or create a job
+    SaveJob.call(employer:, attributes:)
   end
 end
