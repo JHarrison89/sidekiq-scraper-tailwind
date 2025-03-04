@@ -18,15 +18,14 @@ module ShowPages
         response = HTTParty.get(url)
 
         if response.code == 200
+
           # Parsing the HTML document returned by the server
           doc = Nokogiri::HTML(response.body)
 
           # Extracting the job details
           title = doc.css(".details-header__title").text.strip
-          employer = doc.css(".listing-item__info--item-company").text.strip
           location = doc.css(".listing-item__info--item-location").text.strip
           body = doc.css(".details-body__content").to_html
-
           body = Loofah.html5_fragment(body)
                        .scrub!(:prune)
                        .scrub!(:escape)
@@ -43,14 +42,19 @@ module ShowPages
           body = body.gsub("<ul>", '<ul class="list-outside list-disc text-gray-900 dark:text-gray-200">')
           body = body.gsub("<li>", '<li class="mt-2">')
 
+          # Extracting the employer details
+          employer = doc.css(".listing-item__info--item-company").text.strip
+          logo_url = doc.css(".sidebar__content").at("img")["src"]
+
           # Return object when successful
           return OpenStruct.new(
-            company_name: "Doors Open",
+            board: "Doors Open",
             url:,
             title:,
-            employer:,
             location:,
-            html_content: body
+            html_content: body,
+            employer:,
+            logo_url:
           )
         else
           sleep rand(300)
