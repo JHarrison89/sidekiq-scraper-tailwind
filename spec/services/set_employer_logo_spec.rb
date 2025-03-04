@@ -23,6 +23,16 @@ RSpec.describe SetEmployerLogo do
     end
   end
 
+  context "when the logo url is nil" do
+    it "returns nil" do
+      employer = create(:employer)
+      logo_url = nil
+
+      expect(SetEmployerLogo.call(employer:, logo_url:))
+        .to be_nil
+    end
+  end
+
   context "when the employer has a logo" do
     it "returns nil" do
       employer = create(:employer, :with_logo)
