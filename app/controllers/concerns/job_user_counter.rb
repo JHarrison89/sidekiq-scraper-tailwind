@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module JobUserCounter
   extend ActiveSupport::Concern
 
@@ -9,8 +11,8 @@ module JobUserCounter
 
   def count_job_user_records
     @available_count = Job.all.where.not(id: associated_job_ids).count
-    @saved_count = Current.user.job_users.pluck(:status).count('saved')
-    @rejected_count = Current.user.job_users.pluck(:status).count('rejected')
+    @saved_count = Current.user.job_users.pluck(:status).count("saved")
+    @rejected_count = Current.user.job_users.pluck(:status).count("rejected")
   end
 
   def associated_job_ids

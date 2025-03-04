@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class AccountsController < ApplicationController
-  layout 'account'
+  layout "account"
 
   include JobUserCounter
 

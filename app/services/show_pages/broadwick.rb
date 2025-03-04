@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'nokogiri'
-require 'ferrum'
+require "nokogiri"
+require "ferrum"
 
 module ShowPages
   # Scraps a webpage and returns
@@ -36,9 +36,9 @@ module ShowPages
                          .to_html
                          .squish
 
-            body = body.gsub('<p>', '<p class="mt-6 text-sm/6 text-gray-600">')
-            body = body.gsub('<ul>', '<ul class="list-outside list-disc text-gray-900 dark:text-gray-200">')
-            body = body.gsub('<li>', '<li class="mt-2">')
+            body = body.gsub("<p>", '<p class="mt-6 text-sm/6 text-gray-600">')
+            body = body.gsub("<ul>", '<ul class="list-outside list-disc text-gray-900 dark:text-gray-200">')
+            body = body.gsub("<li>", '<li class="mt-2">')
 
           ensure
             browser.quit
@@ -46,10 +46,10 @@ module ShowPages
 
           # Return object when successful
           return OpenStruct.new(
-            company_name: 'Broadwick',
+            company_name: "Broadwick",
             url:,
             title:,
-            employer: 'Broadwick',
+            employer: "Broadwick",
             location:,
             html_content: body,
           )

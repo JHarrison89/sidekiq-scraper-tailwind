@@ -1,4 +1,6 @@
-require 'sidekiq/web'
+# frozen_string_literal: true
+
+require "sidekiq/web"
 
 Rails.application.routes.draw do
   get  "sign_in", to: "sessions#new"
@@ -20,7 +22,7 @@ Rails.application.routes.draw do
     resources :rejects, only: [:index, :update]
   end
 
-  mount Sidekiq::Web => '/sidekiq' # mount Sidekiq::Web in your Rails app
+  mount Sidekiq::Web => "/sidekiq" # mount Sidekiq::Web in your Rails app
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

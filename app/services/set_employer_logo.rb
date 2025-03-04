@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'open-uri'
+require "open-uri"
 
 # Attaches a logo to an employer
 class SetEmployerLogo
@@ -10,7 +10,7 @@ class SetEmployerLogo
     employer.logo.attach(
       io: URI.open(logo_url),
       filename: "#{employer.name.parameterize}.png",
-      content_type: 'image/png'
+      content_type: "image/png"
     )
   end
 end

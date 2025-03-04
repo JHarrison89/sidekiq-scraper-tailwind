@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Identity::EmailsController < ApplicationController
-  layout 'account'
+  layout "account"
 
   before_action :set_user
 

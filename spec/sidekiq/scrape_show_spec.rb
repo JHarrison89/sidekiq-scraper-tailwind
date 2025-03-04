@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-require 'sidekiq/testing'
+require "rails_helper"
+require "sidekiq/testing"
 
 # Stubs a job page script thats
 # custom designed to scrape the
@@ -17,7 +17,7 @@ end
 RSpec.describe ScrapeShow, type: :job do
   include ActiveSupport::Testing::TimeHelpers
 
-  describe '#perform' do
+  describe "#perform" do
     let(:script) { ShowPageScript }
     let(:job_show) { create(:JobShow) }
 
@@ -31,13 +31,13 @@ RSpec.describe ScrapeShow, type: :job do
         title: job.title,
         location: job.location,
         html_content: job.html_content,
-        logo_url: 'http://example.com/logo.png',
+        logo_url: "http://example.com/logo.png",
         employer: job.employer.name
       )
     end
 
-    let(:logo_url) { 'http://example.com/logo.png' }
-    let(:fake_file) { StringIO.new('fake image data') }
+    let(:logo_url) { "http://example.com/logo.png" }
+    let(:fake_file) { StringIO.new("fake image data") }
 
     before do
       # Stub the call to Script
@@ -47,8 +47,8 @@ RSpec.describe ScrapeShow, type: :job do
       allow(URI).to receive(:open).with(logo_url).and_return(fake_file)
     end
 
-    context 'when given attributes of a job' do
-      it 'creates a new job record if the URL does not belong to a job' do
+    context "when given attributes of a job" do
+      it "creates a new job record if the URL does not belong to a job" do
         expect { subject.perform(job_show.id) }
           .to change(Job, :count).by(1)
 
@@ -62,7 +62,7 @@ RSpec.describe ScrapeShow, type: :job do
         )
       end
 
-      it 'updates the job if the URL belongs an existing job' do
+      it "updates the job if the URL belongs an existing job" do
         # Persisted job record
         create(:job, employer: create(:employer, :with_logo))
 

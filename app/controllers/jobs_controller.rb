@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class JobsController < ApplicationController
   before_action :set_user
   before_action :redirect_unless_admin
   before_action :set_job, only: %i[show edit update destroy]
 
-  layout 'account'
+  layout "account"
 
   include JobUserCounter
 
@@ -71,7 +73,7 @@ class JobsController < ApplicationController
   end
 
   def redirect_unless_admin
-    redirect_to account_path unless @user.email == 'jeremaia.harrison@gmail.com'
+    redirect_to account_path unless @user.email == "jeremaia.harrison@gmail.com"
   end
 
   def set_job
