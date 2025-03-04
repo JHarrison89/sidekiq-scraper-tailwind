@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'watir'
+require "watir"
 # require 'webdrivers'
 
 module IndexPages
@@ -12,12 +12,12 @@ module IndexPages
       browser = Watir::Browser.new :chrome, headless: true
 
       # Navigate to the target index
-      browser.goto 'https://broadwick.com/careers/'
+      browser.goto "https://broadwick.com/careers/"
 
       # Find and save jobs
-      browser.elements(class_name: 'whr-item').each do |job|
+      browser.elements(class_name: "whr-item").each do |job|
         JobShow.find_or_create_by(
-          board: 'Broadwick',
+          board: "Broadwick",
           url: job.a.href,
           script: ShowPages::Broadwick.name
         )

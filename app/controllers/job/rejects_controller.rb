@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Job::RejectsController < ApplicationController
-  layout 'account'
+  layout "account"
 
   include JobUserCounter
 
@@ -18,6 +20,6 @@ class Job::RejectsController < ApplicationController
 
     @status = job_user.status.to_sym
 
-    flash[:notice] = 'Rejected job'
+    flash[:notice] = "Rejected job"
   end
 end

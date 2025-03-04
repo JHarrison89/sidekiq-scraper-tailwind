@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Job::SavesController < ApplicationController
-  layout 'account'
+  layout "account"
 
   include JobUserCounter
 
@@ -18,6 +20,6 @@ class Job::SavesController < ApplicationController
 
     @status = job_user.status.to_sym
 
-    flash[:notice] = 'Saved job'
+    flash[:notice] = "Saved job"
   end
 end

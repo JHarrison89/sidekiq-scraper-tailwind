@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Identity::PasswordResetsController < ApplicationController
   skip_before_action :authenticate
 

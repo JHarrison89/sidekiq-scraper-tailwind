@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'httparty'
-require 'nokogiri'
+require "httparty"
+require "nokogiri"
 
 module ShowPages
   # Scraps a webpage and returns
@@ -22,10 +22,10 @@ module ShowPages
           doc = Nokogiri::HTML(response.body)
 
           # Extracting the job details
-          title = doc.css('.details-header__title').text.strip
-          employer = doc.css('.listing-item__info--item-company').text.strip
-          location = doc.css('.listing-item__info--item-location').text.strip
-          body = doc.css('.details-body__content').to_html
+          title = doc.css(".details-header__title").text.strip
+          employer = doc.css(".listing-item__info--item-company").text.strip
+          location = doc.css(".listing-item__info--item-location").text.strip
+          body = doc.css(".details-body__content").to_html
 
           body = Loofah.html5_fragment(body)
                        .scrub!(:prune)
@@ -37,15 +37,15 @@ module ShowPages
                        .to_html
                        .squish
 
-          body = body.gsub('<p></p>', '')
-          body = body.gsub('<p>&nbsp;</p>', '')
-          body = body.gsub('<p>', '<p class="mt-6 text-sm/6 text-gray-600">')
-          body = body.gsub('<ul>', '<ul class="list-outside list-disc text-gray-900 dark:text-gray-200">')
-          body = body.gsub('<li>', '<li class="mt-2">')
+          body = body.gsub("<p></p>", "")
+          body = body.gsub("<p>&nbsp;</p>", "")
+          body = body.gsub("<p>", '<p class="mt-6 text-sm/6 text-gray-600">')
+          body = body.gsub("<ul>", '<ul class="list-outside list-disc text-gray-900 dark:text-gray-200">')
+          body = body.gsub("<li>", '<li class="mt-2">')
 
           # Return object when successful
           return OpenStruct.new(
-            company_name: 'Doors Open',
+            company_name: "Doors Open",
             url:,
             title:,
             employer:,

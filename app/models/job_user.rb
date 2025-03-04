@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class JobUser < ApplicationRecord
   belongs_to :user
   belongs_to :job

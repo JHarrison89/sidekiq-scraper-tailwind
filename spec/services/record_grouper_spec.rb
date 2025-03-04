@@ -1,5 +1,6 @@
+# frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe RecordGrouper, type: :model do
   let(:grouped_records) { described_class.call(Job.all) }
