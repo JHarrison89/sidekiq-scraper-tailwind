@@ -109,3 +109,5 @@ gem "bugsnag", "~> 6.27"
 gem "ferrum"
 
 gem 'aws-sdk-s3'
+
+gem "rubocop"
