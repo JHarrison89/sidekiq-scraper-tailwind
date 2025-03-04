@@ -8,10 +8,12 @@ class SetEmployerLogo
     return if employer.logo.attached?
     return if logo_url.nil?
 
+    file_type = logo_url.split(".").last
+
     employer.logo.attach(
       io: URI.open(logo_url),
-      filename: "#{employer.name.parameterize}.png",
-      content_type: "image/png"
+      filename: "#{employer.name.parameterize}.#{file_type}",
+      content_type: "image/#{file_type}"
     )
   end
 end
