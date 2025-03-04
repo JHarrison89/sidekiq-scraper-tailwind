@@ -9,7 +9,7 @@ class ScrapeShow
     # Instantiate object
     script = Object.const_get(record.script)
 
-    # Scrape webspage and return result
+    # Scrape webpage and return result
     attributes = script.call(record.url)
 
     # Early return if script return nil
