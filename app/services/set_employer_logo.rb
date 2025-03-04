@@ -6,6 +6,7 @@ require "open-uri"
 class SetEmployerLogo
   def self.call(employer:, logo_url:)
     return if employer.logo.attached?
+    return if logo_url.nil?
 
     employer.logo.attach(
       io: URI.open(logo_url),
