@@ -7,7 +7,7 @@
     <p class="mt-1 text-sm leading-6 text-gray-600">We sent a verification email to the address below. Check that email and follow those instructions to confirm it's your email address.</p>
     <p><%= button_to "Re-send verification email", identity_email_verification_path %></p>
   <% end %>
-  <hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10 dark:border-white/10">
+  <hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10">
   <% if @user.errors.any? %>
     <div class="rounded-md bg-red-50 p-4 mb-10">
       <div class="flex">
@@ -41,7 +41,7 @@
       </div>
     </div>
   </div>
-  <hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10 dark:border-white/10">
+  <hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10">
   <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
     <div>
       <%= form.label :password_challenge, style: "display: block", class: "block text-sm font-medium leading-6 text-gray-900" %>
