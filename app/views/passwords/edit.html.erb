@@ -1,6 +1,6 @@
 <%= form_with(url: password_path, method: :patch) do |form| %>
   <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">Edit password</h1>
-  <hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10 dark:border-white/10">
+  <hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10">
   <% if @user.errors.any? %>
     <div class="rounded-md bg-red-50 p-4 mb-10">
       <div class="flex">
@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  <hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10 dark:border-white/10">
+  <hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10">
   <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
     <div>
       <%= form.label :password, "New password", style: "display: block", class: "block text-sm font-medium leading-6 text-gray-900" %>
