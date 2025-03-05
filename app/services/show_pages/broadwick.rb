@@ -40,18 +40,24 @@ module ShowPages
             body = body.gsub("<ul>", '<ul class="list-outside list-disc text-gray-900 dark:text-gray-200">')
             body = body.gsub("<li>", '<li class="mt-2">')
 
+            # Extracting the employer details
+            # Logo added manually
+            employer = "Broadwick Live"
+            logo_url = nil
+
           ensure
             browser.quit
           end
 
           # Return object when successful
           return OpenStruct.new(
-            company_name: "Broadwick",
+            board: employer,
             url:,
             title:,
-            employer: "Broadwick",
             location:,
             html_content: body,
+            employer:,
+            logo_url:
           )
         else
           sleep rand(150)
