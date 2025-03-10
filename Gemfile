@@ -96,7 +96,9 @@ end
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"
 
-gem "tailwindcss-rails"
+gem "tailwindcss-rails", "~> 3.3.1"
+# pin to tailwindcss version 3.4.13
+gem "tailwindcss-ruby", "3.4.17"
 
 # Make avaible to production & development
 gem "faker"
