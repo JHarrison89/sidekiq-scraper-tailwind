@@ -9,20 +9,25 @@
             <%= link_to job_path(job) do %>
               <li class="relative flex justify-between gap-x-6 py-5">
                 <div class="flex min-w-0 gap-x-4">
-                  <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="<%= employer_logo_helper(employer: job.employer) %>" alt="">
+                  <div class="flex h-12 w-12 rounded-full">
+                    <img class="rounded-full object-scale-down" src="<%= employer_logo_helper(employer: job.employer) %>" alt="">
+                  </div>
                   <div class="min-w-0 flex-auto">
                     <p class="text-sm font-semibold leading-6 text-gray-900">
                         <span class="absolute inset-x-0 -top-px bottom-0"></span>
                         <%= job.title%>
                     </p>
-                    <p class="mt-1 flex text-xs leading-5 text-gray-500">
-                      <%= job.board %>
+                    <p class="mt-1 flex text-xs leading-5 text-gray-500 items-center">
+                      <%= job.employer.name %>
                     </p>
                   </div>
                 </div>
                 <div class="flex shrink-0 items-center gap-x-4">
                   <div class="hidden sm:flex sm:flex-col sm:items-end">
-                    <p class="text-sm leading-6 text-gray-900"></p>
+                    <p class="flex mt-1 text-xs leading-5 text-gray-500 text-left gap-x-4 w-full">
+                      <img class="h-5 w-5 flex-none rounded-full bg-gray-50" src="<%= board_logo_helper(board: job.board) %>" alt="">
+                      <%= job.board %>
+                    </p>
                     <p class="mt-1 text-xs leading-5 text-gray-500">Posted <%= job.created_at.strftime("%-d %b, %Y, %-l:%M%P") %></p>
                   </div>
                   <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
