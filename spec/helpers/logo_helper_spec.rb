@@ -43,7 +43,7 @@ RSpec.describe LogoHelper, type: :helper do
     context "when the employer logo does not exist" do
       it "returns a path to the default logo" do
         allow(LogoHelper::FetchImage).to receive(:presigned_url).and_return(example_s3_url)
-        expect(helper.employer_logo_helper(employer:)).to eq(rails_storage_redirect_path(employer.logo))
+        expect(helper.employer_logo_helper(employer:)).to eq(example_s3_url)
       end
     end
   end
