@@ -21,7 +21,7 @@ RSpec.describe LogoHelper, type: :helper do
       end
     end
 
-    context "when the board logo does not exists" do
+    context "when the board logo does not exist" do
       it "returns a presigned URL for the default logo" do
         allow(LogoHelper::FetchImage).to receive(:file_exists?).and_return(false)
         allow(LogoHelper::FetchImage).to receive(:presigned_url).and_return(example_s3_url)
