@@ -15,14 +15,17 @@
                         <span class="absolute inset-x-0 -top-px bottom-0"></span>
                         <%= job.title%>
                     </p>
-                    <p class="mt-1 flex text-xs leading-5 text-gray-500">
-                      <%= job.board %>
+                    <p class="mt-1 flex text-xs leading-5 text-gray-500 items-center">
+                      <%= job.employer.name %>
                     </p>
                   </div>
                 </div>
                 <div class="flex shrink-0 items-center gap-x-4">
                   <div class="hidden sm:flex sm:flex-col sm:items-end">
-                    <p class="text-sm leading-6 text-gray-900"></p>
+                    <p class="flex mt-1 text-xs leading-5 text-gray-500 text-left gap-x-4 w-full">
+                      <img class="h-5 w-5 flex-none rounded-full bg-gray-50" src="<%= board_logo_helper(board: job.board) %>" alt="">
+                      <%= job.board %>
+                    </p>
                     <p class="mt-1 text-xs leading-5 text-gray-500">Posted <%= job.created_at.strftime("%-d %b, %Y, %-l:%M%P") %></p>
                   </div>
                   <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
