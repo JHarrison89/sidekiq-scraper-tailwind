@@ -13,36 +13,39 @@ RSpec.describe LogoHelper, type: :helper do
 
   describe "#board_logo_helper" do
     context "when the board logo exists" do
-      it "returns a presigned URL for the board logo" do
-        allow(LogoHelper::FetchImage).to receive(:file_exists?).and_return(true)
-        allow(LogoHelper::FetchImage).to receive(:presigned_url).and_return(example_s3_url)
+      it "returns a URL for the board logo" do
+        board = create(:board, :with_logo)
 
-        expect(helper.board_logo_helper(board: "board")).to eq(example_s3_url)
+        expect(helper.board_logo_helper(board:)).to eq(rails_storage_redirect_path(board.logo))
       end
     end
 
     context "when the board logo does not exist" do
-      it "returns a presigned URL for the default logo" do
-        allow(LogoHelper::FetchImage).to receive(:file_exists?).and_return(false)
+      it "returns a URL for the default logo" do
         allow(LogoHelper::FetchImage).to receive(:presigned_url).and_return(example_s3_url)
 
-        expect(helper.board_logo_helper(board: "board")).to eq(example_s3_url)
+        board = create(:board)
+
+        expect(helper.board_logo_helper(board:)).to eq(example_s3_url)
       end
     end
   end
 
   describe "#employer_logo_helper" do
-    let(:employer) { create(:employer, :with_logo) }
-
     context "when the employer logo exists" do
-      it "returns a path to the employer logo" do
+      it "returns a URL for the employer logo" do
+        employer = create(:employer, :with_logo)
+
         expect(helper.employer_logo_helper(employer:)).to eq(rails_storage_redirect_path(employer.logo))
       end
     end
 
     context "when the employer logo does not exist" do
-      it "returns a path to the default logo" do
+      it "returns a URL for the default logo" do
         allow(LogoHelper::FetchImage).to receive(:presigned_url).and_return(example_s3_url)
+
+        employer = create(:employer)
+
         expect(helper.employer_logo_helper(employer:)).to eq(example_s3_url)
       end
     end

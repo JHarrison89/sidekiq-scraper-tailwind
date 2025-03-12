@@ -5,10 +5,10 @@ require "rails_helper"
 RSpec.describe SaveJob do
   context "when given new job URL" do
     it "creates a new job" do
-      # Unpersisted job
+      # Unpersisted job, employer and board records are create by the factory
       job = build(:job)
 
-      expect { described_class.call(employer: job.employer, attributes: job) }
+      expect { described_class.call(employer: job.employer, board: job.board, attributes: job) }
         .to change(Job, :count).by(1)
     end
   end
@@ -18,7 +18,7 @@ RSpec.describe SaveJob do
       # Persisted job
       job = create(:job)
 
-      expect { described_class.call(employer: job.employer, attributes: job) }
+      expect { described_class.call(employer: job.employer, board: job.board, attributes: job) }
         .to change(Job, :count).by(0)
     end
   end
