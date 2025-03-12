@@ -21,18 +21,19 @@ RSpec.describe ScrapeShow, type: :job do
     let(:script) { ShowPageScript }
     let(:job_show) { create(:JobShow) }
 
-    # Unpersisted job record
-    let(:job) { build(:job, employer: create(:employer, :with_logo)) }
+    # Unpersisted job record, persisted employer and board.
+    # Here we assume that the employer and board are already exist.
+    let(:job) { build(:job, employer: create(:employer, :with_logo), board: create(:board, :with_logo)) }
 
     let(:attributes) do
       OpenStruct.new(
-        board: job.board,
         url: job.url,
         title: job.title,
         location: job.location,
         html_content: job.html_content,
         logo_url: "http://example.com/logo.png",
-        employer: job.employer.name
+        employer: job.employer.name,
+        board: job.board.name
       )
     end
 
@@ -53,18 +54,18 @@ RSpec.describe ScrapeShow, type: :job do
           .to change(Job, :count).by(1)
 
         expect(Job.last).to have_attributes(
-          board: job.board,
           title: job.title,
           location: job.location,
           html_content: job.html_content,
           url: job.url,
-          employer: job.employer
+          employer: job.employer,
+          board: job.board
         )
       end
 
       it "updates the job if the URL belongs an existing job" do
         # Persisted job record
-        create(:job, employer: create(:employer, :with_logo))
+        create(:job)
 
         expect { subject.perform(job_show.id) }
           .to change(Job, :count).by(0)

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Job < ApplicationRecord
+  belongs_to :board
   belongs_to :employer
 
   has_many :job_users  # Association with the join table

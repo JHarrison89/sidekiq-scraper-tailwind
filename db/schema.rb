@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_23_174401) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_11_211808) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_23_174401) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "boards", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "employers", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -68,7 +74,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_23_174401) do
   end
 
   create_table "jobs", force: :cascade do |t|
-    t.string "board"
     t.string "title"
     t.string "url"
     t.datetime "created_at", null: false
@@ -76,14 +81,9 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_23_174401) do
     t.string "location"
     t.text "html_content"
     t.bigint "employer_id"
+    t.bigint "board_id"
+    t.index ["board_id"], name: "index_jobs_on_board_id"
     t.index ["employer_id"], name: "index_jobs_on_employer_id"
-  end
-
-  create_table "jobs_users", id: false, force: :cascade do |t|
-    t.bigint "job_id", null: false
-    t.bigint "user_id", null: false
-    t.index ["job_id"], name: "index_jobs_users_on_job_id"
-    t.index ["user_id"], name: "index_jobs_users_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -108,6 +108,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_23_174401) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "job_users", "jobs"
   add_foreign_key "job_users", "users"
+  add_foreign_key "jobs", "boards"
   add_foreign_key "jobs", "employers"
   add_foreign_key "sessions", "users"
 end

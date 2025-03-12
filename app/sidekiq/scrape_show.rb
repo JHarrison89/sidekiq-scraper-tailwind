@@ -21,7 +21,12 @@ class ScrapeShow
       logo_url: attributes.logo_url
     )
 
+    # Find or create a board
+    board = SetBoard.call(
+      name: attributes.board
+    )
+
     # Find or create a job
-    SaveJob.call(employer:, attributes:)
+    SaveJob.call(employer:, board:, attributes:)
   end
 end

@@ -9,7 +9,8 @@ RSpec.describe "Account show" do
 
     create(:user)
 
-    create(:job, title: "Job 1", created_at: Date.today)
+    # We only asset the Employer name in the first within job list block
+    job_1 = create(:job, title: "Job 1", created_at: Date.today)
     create(:job, title: "Job 2", created_at: 1.day.ago)
     create(:job, title: "Job 3", created_at: 2.day.ago)
     create(:job, title: "Job 4", created_at: Date.today.beginning_of_week)
@@ -39,7 +40,7 @@ RSpec.describe "Account show" do
 
     within ".job-list", text: "Posted today" do
       expect(page).to have_text("Job 1")
-      expect(page).to have_text("Big Company Inc")
+      expect(page).to have_text(job_1.employer.name)
     end
 
     within ".job-list", text: "Posted yesterday" do

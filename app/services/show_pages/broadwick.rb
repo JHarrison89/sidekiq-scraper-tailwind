@@ -42,7 +42,6 @@ module ShowPages
 
             # Extracting the employer details
             # Logo added manually
-            employer = "Broadwick Live"
             logo_url = nil
 
           ensure
@@ -51,12 +50,12 @@ module ShowPages
 
           # Return object when successful
           return OpenStruct.new(
-            board: employer,
+            board: "Broadwick Live",
             url:,
             title:,
             location:,
             html_content: body,
-            employer:,
+            employer: "Broadwick Live",
             logo_url:
           )
         else
