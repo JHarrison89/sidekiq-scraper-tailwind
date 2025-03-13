@@ -8,6 +8,14 @@ module LogoHelper
   # TODO: Create a Board model and store board logos in the database
   #
   class FetchImage
+    def self.client
+      Aws::S3::Client.new(
+        region: "eu-north-1",
+        access_key_id: Rails.application.credentials.dig(:aws, :access_key_id),
+        secret_access_key: Rails.application.credentials.dig(:aws, :secret_access_key)
+      )
+    end
+
     def self.presigned_url(key:)
       signer = Aws::S3::Presigner.new(client:)
 
