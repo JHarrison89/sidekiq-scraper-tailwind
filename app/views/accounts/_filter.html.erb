@@ -1,9 +1,9 @@
 <div class="relative inline-block text-left mb-3" data-controller="dropdown">
-  <div>
-    <button type="button" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true" data-action="click->dropdown#toggleDropDown">
-      Filter by Employer
-    </button>
-  </div>
+  <button type="button" class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true" data-action="click->dropdown#toggleDropDown">
+    Filter by Employer
+    <%= turbo_frame_tag "employer_filter_status" %>
+  </button>
+
 
   <!--
     Dropdown menu, show/hide based on menu state.
@@ -17,7 +17,7 @@
   -->
   <div class="hidden absolute bg-white focus:outline-none mt-2 origin-top-right left-0 ring-1 ring-black/5 rounded-md shadow-lg z-10" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" data-dropdown-target="dropdown">
     <div class="py-1" role="none">
-      <%= form_with url: account_path, method: :get, data: { turbo_frame: "job_list", controller: "clear-checkboxes" }, class: "bg-white shadow-md rounded-lg p-4 flex space-x-4 items-center" do |form| %>
+      <%= form_with url: account_path, method: :get, data: { turbo_frame: "job_list", turbo_stream: true }, class: "bg-white shadow-md rounded-lg p-4 flex space-x-4 items-center" do |form| %>
         <div class="w-full">
           <%= form.label :employer_id, "Filter by Employer", class: "sr-only block text-sm font-medium text-gray-700" %>
           <%= form.collection_check_boxes :employer_id, employers, :id, :name do |b| %>
@@ -27,23 +27,20 @@
             </div>
           <% end %>
 
-          <button
-            type="submit"
-            data-action="click->dropdown#toggleDropDown"
-            class="w-full mt-3 mb-1 rounded-md bg-indigo-500 px-3.5 py-2.5
-                 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400
-                 focus-visible:outline focus-visible:outline-2
-                 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-            Filter
-          </button>
+          <%= form.submit "Filter",
+              data: { action: "click->dropdown#toggleDropDown" },
+              class: "w-full mt-3 mb-1 rounded-md bg-indigo-500 px-3.5 py-2.5
+                    text-sm font-semibold text-white shadow-sm hover:bg-indigo-400
+                    focus-visible:outline focus-visible:outline-2
+                    focus-visible:outline-offset-2 focus-visible:outline-indigo-500" %>
 
-          <%= link_to "Clear filter",
+            <%= link_to "Clear filter",
               account_path,
               data: {action: "click->dropdown#toggleDropDown:stop"},
               class: "w-full block text-center rounded-md bg-white px-3.5
-                     py-2.5 text-sm font-semibold text-gray-900 shadow-sm
-                     ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          %>
+                      py-2.5 text-sm font-semibold text-gray-900 shadow-sm
+                      ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            %>
         </div>
       <% end %>
     </div>

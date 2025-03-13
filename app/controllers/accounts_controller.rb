@@ -16,6 +16,15 @@ class AccountsController < ApplicationController
 
     # Groups jobs by created_at date
     @jobs = RecordGrouper.call(jobs)
+
+    respond_to do |format|
+      # Use turbo_stream if filters are present
+      if filtered_params.present?
+        format.turbo_stream
+      else
+        format.html
+      end
+    end
   end
 
   private
