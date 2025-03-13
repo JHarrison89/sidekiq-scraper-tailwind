@@ -36,6 +36,14 @@
                  focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
             Filter
           </button>
+
+          <%= link_to "Clear filter",
+              account_path,
+              data: {action: "click->dropdown#toggleDropDown:stop"},
+              class: "w-full block text-center rounded-md bg-white px-3.5
+                     py-2.5 text-sm font-semibold text-gray-900 shadow-sm
+                     ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          %>
         </div>
       <% end %>
     </div>
