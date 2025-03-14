@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe RecordGrouper, type: :model do
+RSpec.describe GroupRecordsByDate, type: :model do
   let(:grouped_records) { described_class.call(Job.all) }
 
   it "groups records created today" do

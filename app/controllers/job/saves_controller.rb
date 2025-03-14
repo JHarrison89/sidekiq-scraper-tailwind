@@ -7,7 +7,7 @@ class Job::SavesController < ApplicationController
 
   def index
     jobs = Current.user.jobs.where(job_users: { status: :saved })
-    @jobs = RecordGrouper.call(jobs)
+    @grouped_jobs = GroupRecordsByDate.call(jobs)
   end
 
   def update
