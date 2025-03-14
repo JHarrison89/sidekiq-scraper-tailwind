@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Used to group records by creation date, e.g job records
-class RecordGrouper
+class GroupRecordsByDate
   def self.call(records)
     grouped = {
       today: [],

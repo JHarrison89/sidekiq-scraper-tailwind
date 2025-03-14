@@ -15,7 +15,7 @@ class AccountsController < ApplicationController
     @employers = jobs.map(&:employer).uniq
 
     # Groups jobs by created_at date
-    @jobs = RecordGrouper.call(jobs)
+    @grouped_jobs = GroupRecordsByDate.call(jobs)
 
     respond_to do |format|
       # Use turbo_stream if filters are present

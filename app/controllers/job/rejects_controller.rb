@@ -7,7 +7,7 @@ class Job::RejectsController < ApplicationController
 
   def index
     jobs = Current.user.jobs.where(job_users: { status: :rejected })
-    @jobs = RecordGrouper.call(jobs)
+    @grouped_jobs = GroupRecordsByDate.call(jobs)
   end
 
   def update
