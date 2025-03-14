@@ -56,7 +56,6 @@ Skip the headach and generate a non-expiring token by running
 Its worth double checking the token is correct from time to time to avoild issues.
  - https://devcenter.heroku.com/articles/platform-api-quickstart#authentication
 
-
 #### Add platform to Gemfile.lock
  Run `bundle lock --add-platform x86_64-linux` to configure OS
 
@@ -69,6 +68,13 @@ Add Heroku redis (free alternatives in judoscale link below)
 - https://elements.heroku.com/addons/heroku-redis#pricing
 - https://elements.heroku.com/addons/heroku-postgresql
 - https://elements.heroku.com/addons/scheduler
+
+#### Connect Postgres to TablePlus 
+- Remove all whitespace from the URL when copying the URL from the Heroku Postgres dashboard. Otherwise, it won't connect.
+
+#### Setting up Heroku on a new machine 
+- Install the Heroku CLI [docs](https://devcenter.heroku.com/articles/heroku-cli)
+- Add Heroku remote to project `heroku git:remote -a app-name`
 
 ## Configure Sidekiq in production
 Documentation is not great.
