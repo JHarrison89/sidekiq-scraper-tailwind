@@ -1,5 +1,6 @@
 <%= form_with(url: password_path, method: :patch) do |form| %>
-  <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">Edit password</h1>
+  <h1 class="font-semibold sm:text-xl/8 leading-6 text-gray-900">Change your password</h1>
+  <p class="mt-2 text-sm text-gray-700">Change your password using the form below.</p>
   <hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10">
   <% if @user.errors.any? %>
     <div class="rounded-md bg-red-50 p-4 mb-10">
