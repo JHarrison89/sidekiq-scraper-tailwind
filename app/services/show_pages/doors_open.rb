@@ -57,7 +57,7 @@ module ShowPages
             logo_url:
           )
         else
-          sleep rand(300)
+          sleep rand(sleep_time)
           attempts += 1
         end
       end
