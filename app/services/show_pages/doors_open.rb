@@ -7,13 +7,13 @@ module ShowPages
   # Scraps a webpage and returns
   # an object with job attributes
   class DoorsOpen
-    def self.call(url)
+    def self.call(url, sleep_time = 200)
       attempts = 0
       max_attempts = 3
 
       while attempts < max_attempts
         # Avoiding being blocked
-        sleep rand(200)
+        sleep rand(sleep_time)
 
         response = HTTParty.get(url)
 

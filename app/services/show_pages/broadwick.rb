@@ -7,12 +7,12 @@ module ShowPages
   # Scraps a webpage and returns
   # an object with job attributes
   class Broadwick
-    def self.call(url)
+    def self.call(url, sleep_time = 120)
       attempts = 0
       max_attempts = 3
 
       while attempts < max_attempts
-        sleep rand(120)
+        sleep rand(sleep_time)
         browser = Ferrum::Browser.new(browser_options: { 'no-sandbox': nil })
         browser.goto(url)
 
@@ -59,7 +59,7 @@ module ShowPages
             logo_url:
           )
         else
-          sleep rand(150)
+          sleep rand(sleep_time)
           attempts += 1
         end
       end
