@@ -1,11 +1,13 @@
 
 <%= form_with(url: identity_email_path, method: :patch) do |form| %>
   <% if Current.user.verified? %>
-    <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">Change your email</h1>
+    <h1 class="font-semibold sm:text-xl/8 leading-6 text-gray-900">Change your email</h1>
   <% else %>
-    <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">Verify your email</h1>
-    <p class="mt-1 text-sm leading-6 text-gray-600">We sent a verification email to the address below. Check that email and follow those instructions to confirm it's your email address.</p>
-    <p><%= button_to "Re-send verification email", identity_email_verification_path %></p>
+    <h1 class="font-semibold sm:text-xl/8 leading-6 text-gray-900">Verify your email</h1>
+    <p class="mt-1 text-sm leading-6 text-gray-600">We sent a verification email to the address below.</p>
+        <p class="mt-1 text-sm leading-6 text-gray-600">Check that email and follow those instructions to confirm it's your email address.</p>
+
+    <p><%= button_to "Re-send verification email", identity_email_verification_path, class: "mt-3 rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" %></p>
   <% end %>
   <hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10">
   <% if @user.errors.any? %>
