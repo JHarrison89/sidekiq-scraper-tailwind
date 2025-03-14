@@ -8,12 +8,14 @@ require "sidekiq/testing"
 # show page of a site
 # e.g doorsopen.com
 class ShowPageScript
-  def self.call(url); end
+  def self.call(url, sleep_time); end
 end
 
 # Tests the show page job. The call to the
 # show page script is stubs to avoid calling
 # out to a real website.
+#
+# TODO: Update test to include sleep_time argument
 RSpec.describe ScrapeShow, type: :job do
   include ActiveSupport::Testing::TimeHelpers
 
@@ -50,7 +52,7 @@ RSpec.describe ScrapeShow, type: :job do
 
     context "when given attributes of a job" do
       it "creates a new job record if the URL does not belong to a job" do
-        expect { subject.perform(job_show.id) }
+        expect { subject.perform(job_show.id, 10) }
           .to change(Job, :count).by(1)
 
         expect(Job.last).to have_attributes(

@@ -3,14 +3,14 @@
 class ScrapeShow
   include Sidekiq::Job
 
-  def perform(id)
+  def perform(id, sleep_time = 200)
     record = JobShow.find(id)
 
     # Instantiate object
     script = Object.const_get(record.script)
 
     # Scrape webpage and return result
-    attributes = script.call(record.url)
+    attributes = script.call(record.url, sleep_time)
 
     # Early return if script return nil
     return if attributes.nil?
