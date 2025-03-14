@@ -1,9 +1,7 @@
 <%= turbo_frame_tag "job_list" do %>
   <ul role="list" class="divide-y divide-gray-100">
     <div class="flex flex-col space-y-8">
-      <% @jobs.each do |date, jobs| %>
-
-
+      <% jobs.each do |date, jobs| %>
         <div class="job-list">
           <p class="mt-1 text-2xl/8 text-gray-900 font-semibold sm:text-xl/8">Posted <%= date.to_s.humanize.downcase %></p>
           <% jobs.each do |job| %>

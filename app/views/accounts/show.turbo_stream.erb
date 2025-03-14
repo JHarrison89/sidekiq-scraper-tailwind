@@ -5,5 +5,5 @@
 <% end %>
 
 <%= turbo_stream.replace "job_list" do %>
-  <%= render "shared/job_list", locals: { jobs: @jobs } %>
+  <%= render "shared/job_list", jobs: @jobs %>
 <% end %>
