@@ -21,7 +21,7 @@ RSpec.describe ScrapeShow, type: :job do
 
   describe "#perform" do
     let(:script) { ShowPageScript }
-    let(:job_show) { create(:JobShow) }
+    let(:job_show) { create(:job_show) }
 
     # Unpersisted job record, persisted employer and board.
     # Here we assume that the employer and board are already exist.
