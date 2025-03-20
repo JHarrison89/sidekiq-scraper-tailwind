@@ -5,6 +5,8 @@ require "spec_helper"
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require_relative "support/factory_bot"
+require_relative "support/auth_helpers"
+
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require "rspec/rails"
@@ -32,6 +34,7 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
 RSpec.configure do |config|
   # automatically include FactoryBot methods in your tests
   config.include FactoryBot::Syntax::Methods
@@ -69,4 +72,7 @@ RSpec.configure do |config|
 
   # Allows you to use the travel_to method in your tests
   config.include ActiveSupport::Testing::TimeHelpers
+
+  # Allows you to use the sign_in method in your tests
+  config.include AuthHelpers
 end
