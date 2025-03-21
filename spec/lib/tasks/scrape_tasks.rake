@@ -20,9 +20,9 @@ RSpec.describe "scrape_tasks:scrape_show_pages", type: :task do
 
   describe "scrape_show_pages" do
     # Show page records
-    let!(:job_show1) { create(:JobShow, url: "https://example.com/job1") }
-    let!(:job_show2) { create(:JobShow, url: "https://example.com/job2") }
-    let!(:job_show3) { create(:JobShow, url: "https://example.com/job3") }
+    let!(:job_show1) { create(:job_show, url: "https://example.com/job1") }
+    let!(:job_show2) { create(:job_show, url: "https://example.com/job2") }
+    let!(:job_show3) { create(:job_show, url: "https://example.com/job3") }
 
 
     # Persisted Job records
