@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
-# Used to group records by creation date, e.g job records
+# Used to group records by creation date, e.g. job records.
+# I've made an intentional decision to create this as a service object
+# instead of a controller concern. It matches the criteria for both but
+# it's easier to test as a service object and fits the pattern of this
+# app of leaning into service objects for business logic.
 class GroupRecordsByDate
   def self.call(records)
     grouped = {
