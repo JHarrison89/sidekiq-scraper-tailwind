@@ -17,10 +17,7 @@ Rails.application.routes.draw do
   resource :account, only: [:show]
   resources :jobs
   resources :saves, only: [:index, :update]
-
-  namespace :job do
-    resources :rejects, only: [:index, :update]
-  end
+  resources :rejects, only: [:index, :update]
 
   mount Sidekiq::Web => "/sidekiq" # mount Sidekiq::Web in your Rails app
 

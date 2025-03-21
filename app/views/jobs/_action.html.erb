@@ -3,11 +3,11 @@
     <%= link_to "Back", account_path, class: "relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-10" %>
 
     <% if status == :saved %>
-        <%= button_to "Reject job", job_reject_path(job_id: job.id), method: :patch, class: "relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-10" %>
+        <%= button_to "Reject job", reject_path(job), method: :patch, class: "relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-10" %>
     <% elsif status == :rejected %>
         <%= button_to "Save job", safe_path(job), method: :patch, class: "relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-10" %>
     <% else %>
-      <%= button_to "Reject job", job_reject_path(job_id: job.id), method: :patch, class: "relative -ml-px inline-flex items-center bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-10" %>
+      <%= button_to "Reject job", reject_path(job), method: :patch, class: "relative -ml-px inline-flex items-center bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-10" %>
       <%= button_to "Save job", safe_path(job), method: :patch, class: "relative -ml-px inline-flex items-center rounded-r-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus:z-10" %>
     <% end %>
   </span>
