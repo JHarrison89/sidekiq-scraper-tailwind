@@ -20,8 +20,8 @@ RSpec.describe GroupRecordsByDate, type: :model do
     expect(grouped_records[:yesterday]).to contain_exactly(job)
   end
 
-  describe "records created this week" do
-    it "groups records created earlier this week" do
+  context "when given records created on Monday, Tuesday or Wednesday this week" do
+    it "groups the records into earlier_this_week" do
       # Friday 2024, January 31st
       travel_to Time.zone.local(2025, 1, 31)
 
@@ -173,7 +173,7 @@ RSpec.describe GroupRecordsByDate, type: :model do
     # Friday 2024, January 31st
     travel_to Time.zone.local(2025, 1, 31)
 
-    begining_of_month_after = create(:job, created_at: Date.today.beginning_of_month)
+    beginning_of_month_after = create(:job, created_at: Date.today.beginning_of_month)
 
     # Grouped into :four_weeks_ago
     last_day = create(:job, created_at: (Date.today << 1).end_of_month)
@@ -188,38 +188,38 @@ RSpec.describe GroupRecordsByDate, type: :model do
       first_day
     )
     expect(grouped_records[:last_month]).not_to include(
-      begining_of_month_after, last_day_month_before
+      beginning_of_month_after, last_day_month_before
     )
-  end
-
-  it "groups records created two months ago" do
-      # Friday 2024, January 31st
-      travel_to Time.zone.local(2025, 1, 31)
-
-      begining_of_month_after = create(:job, created_at: (Date.today << 1).beginning_of_month)
-
-      # Grouped into :four_weeks_ago
-      last_day = create(:job, created_at: (Date.today << 2).end_of_month)
-
-      # Grouped into :last_month
-      first_day = create(:job, created_at: (Date.today << 2).beginning_of_month)
-
-      last_day_month_before = create(:job, created_at: (Date.today << 3).end_of_month)
-
-      expect(grouped_records[:two_months_ago].count).to eq(2)
-      expect(grouped_records[:two_months_ago]).to include(
-        first_day, last_day
-      )
-      expect(grouped_records[:two_months_ago]).not_to include(
-        begining_of_month_after, last_day_month_before
-      )
   end
 
   it "groups records created two months ago" do
     # Friday 2024, January 31st
     travel_to Time.zone.local(2025, 1, 31)
 
-    begining_of_month_after = create(:job, created_at: (Date.today << 2).beginning_of_month)
+    beginning_of_month_after = create(:job, created_at: (Date.today << 1).beginning_of_month)
+
+    # Grouped into :four_weeks_ago
+    last_day = create(:job, created_at: (Date.today << 2).end_of_month)
+
+    # Grouped into :last_month
+    first_day = create(:job, created_at: (Date.today << 2).beginning_of_month)
+
+    last_day_month_before = create(:job, created_at: (Date.today << 3).end_of_month)
+
+    expect(grouped_records[:two_months_ago].count).to eq(2)
+    expect(grouped_records[:two_months_ago]).to include(
+      first_day, last_day
+    )
+    expect(grouped_records[:two_months_ago]).not_to include(
+      beginning_of_month_after, last_day_month_before
+    )
+  end
+
+  it "groups records created three months ago" do
+    # Friday 2024, January 31st
+    travel_to Time.zone.local(2025, 1, 31)
+
+    beginning_of_month_after = create(:job, created_at: (Date.today << 2).beginning_of_month)
 
     # Grouped into :four_weeks_ago
     last_day = create(:job, created_at: (Date.today << 3).end_of_month)
@@ -234,7 +234,7 @@ RSpec.describe GroupRecordsByDate, type: :model do
       first_day, last_day
     )
     expect(grouped_records[:three_months_ago]).not_to include(
-      begining_of_month_after, last_day_month_before
+      beginning_of_month_after, last_day_month_before
     )
   end
 
@@ -246,5 +246,21 @@ RSpec.describe GroupRecordsByDate, type: :model do
     create(:job, created_at: (Date.today << 4).end_of_month)
 
     expect(grouped_records).to be_empty
+  end
+
+  context "when records are not ordered by creation date" do
+    it "orders records by creation date" do
+      job_one = create(:job, created_at: DateTime.now)
+      job_two = create(:job, created_at: DateTime.now - 1.minute)
+      job_three = create(:job, created_at: DateTime.now + 1.minutes)
+
+      expect(grouped_records[:today]).to eq(
+        [
+          job_three,
+          job_one,
+          job_two
+        ]
+      )
+    end
   end
 end

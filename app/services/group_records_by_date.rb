@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
-# Used to group records by creation date, e.g job records
+# Used to group records by creation date, e.g. job records.
+# I've made an intentional decision to create this as a service object
+# instead of a controller concern. It matches the criteria for both but
+# it's easier to test as a service object and fits the pattern of this
+# app of leaning into service objects for business logic.
 class GroupRecordsByDate
   def self.call(records)
     grouped = {
@@ -16,7 +20,7 @@ class GroupRecordsByDate
       three_months_ago: []
     }
 
-    records.each do |record|
+    records.order(created_at: :desc).each do |record|
       created_at = record.created_at.to_date
       today = Date.today
       start_of_week = today.beginning_of_week
