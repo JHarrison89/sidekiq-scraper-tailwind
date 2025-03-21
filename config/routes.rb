@@ -16,9 +16,9 @@ Rails.application.routes.draw do
   end
   resource :account, only: [:show]
   resources :jobs
+  resources :saves, only: [:index, :update]
 
   namespace :job do
-    resources :saves, only: [:index, :update]
     resources :rejects, only: [:index, :update]
   end
 

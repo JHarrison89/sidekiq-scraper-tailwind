@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-class Job::SavesController < ApplicationController
+class SavesController < ApplicationController
   layout "account"
-
   include JobUserCounter
 
   def index
@@ -11,7 +10,7 @@ class Job::SavesController < ApplicationController
   end
 
   def update
-    @job = Job.find(params[:job_id])
+    @job = Job.find(params[:id])
 
     job_user = Current.user.job_users.find_or_create_by(job: @job)
     job_user.update(status: :saved)
