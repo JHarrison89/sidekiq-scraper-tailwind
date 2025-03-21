@@ -72,7 +72,6 @@ group :development, :test do
   gem "rspec-rails"
   gem "pry-rails"
   gem "pry-byebug"
-  gem "authentication-zero", "~> 3.0"
 end
 
 group :development do
@@ -93,6 +92,10 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# Use auth zero in production and development
+gem "authentication-zero", "~> 3.0"
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"
 
