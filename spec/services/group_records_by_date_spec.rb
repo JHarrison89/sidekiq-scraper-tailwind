@@ -247,4 +247,20 @@ RSpec.describe GroupRecordsByDate, type: :model do
 
     expect(grouped_records).to be_empty
   end
+
+  context "when records are not ordered by creation date" do
+    it "orders records by creation date" do
+      job_one = create(:job, created_at: DateTime.now)
+      job_two = create(:job, created_at: DateTime.now - 1.minute)
+      job_three = create(:job, created_at: DateTime.now + 1.minutes)
+
+      expect(grouped_records[:today]).to eq(
+        [
+          job_three,
+          job_one,
+          job_two
+        ]
+      )
+    end
+  end
 end

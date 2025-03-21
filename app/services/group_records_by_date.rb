@@ -20,7 +20,7 @@ class GroupRecordsByDate
       three_months_ago: []
     }
 
-    records.each do |record|
+    records.order(created_at: :desc).each do |record|
       created_at = record.created_at.to_date
       today = Date.today
       start_of_week = today.beginning_of_week
