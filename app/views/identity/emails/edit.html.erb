@@ -1,9 +1,11 @@
 
 <%= form_with(url: identity_email_path, method: :patch) do |form| %>
+  <h1 class="font-semibold sm:text-xl/8 leading-6 text-gray-900">Manage your email</h1>
+  <hr role="presentation" class="my-10 mt-6 w-full border-t border-zinc-950/10">
   <% if Current.user.verified? %>
     <h1 class="font-semibold sm:text-xl/8 leading-6 text-gray-900">Change your email</h1>
   <% else %>
-    <h1 class="font-semibold sm:text-xl/8 leading-6 text-gray-900">Verify your email</h1>
+    <h1 class="font-semibold leading-6 text-gray-900">Verify your email</h1>
     <p class="mt-1 text-sm leading-6 text-gray-600">We sent a verification email to the address below.</p>
         <p class="mt-1 text-sm leading-6 text-gray-600">Check that email and follow those instructions to confirm it's your email address.</p>
 
@@ -32,6 +34,8 @@
       </div>
     </div>
   <% end %>
+
+  <h1 class="font-semibold leading-6 text-gray-900">Change your email</h1>
   <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
     <div>
       <%= form.label :email, "New email", style: "display: block", class: "block text-sm font-medium leading-6 text-gray-900" %>
